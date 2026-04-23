@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>viax — Comparte el camino.</title>
+  <meta name="description" content="App de carpooling de confianza en CDMX. Solo viajas con personas que alguien de tu red ya conoce." />
+  <meta property="og:title" content="viax — Comparte el camino." />
+  <meta property="og:description" content="App de carpooling de confianza en CDMX. Solo viajas con personas que alguien de tu red ya conoce." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --azul: #2D6BE4;
+      --teal: #00C9A7;
+      --dark: #1A1A2E;
+      --dark2: #12122A;
+      --gris: #F5F5F8;
+      --blanco: #FFFFFF;
+      --azul-light: rgba(45, 107, 228, 0.12);
+      --teal-light: rgba(0, 201, 167, 0.12);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--dark2);
+      color: var(--blanco);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NOISE TEXTURE ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    section + section {
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(45,107,228,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--azul);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .logo-wordmark {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--blanco);
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+
+    .hero-headline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(38px, 7vw, 58px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--blanco);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .hero-cta {
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.5s forwards;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--azul);
+      color: var(--blanco);
+      border: none;
+      border-radius: 12px;
+      padding: 15px 28px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 24px rgba(45,107,228,0.35);
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(45,107,228,0.5);
+      background: #3d79f0;
+    }
+
+    /* ─── PROBLEMA ─── */
+    .problema-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .problema-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.2s ease;
+    }
+
+    .problema-card:hover {
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .problema-card .icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .problema-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--blanco);
+      margin-bottom: 6px;
+    }
+
+    .problema-card p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.55;
+    }
+
+    /* ─── SECTION TITLES ─── */
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      color: var(--blanco);
+      margin-bottom: 16px;
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+
+    /* ─── CIRCULOS ─── */
+    .circulos-visual {
+      margin: 48px 0 40px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .circulo-node {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .circulo-node .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .avatar-pasajero {
+      background: rgba(0,201,167,0.15);
+      border: 2px solid var(--teal);
+      color: var(--teal);
+    }
+
+    .avatar-intermediario {
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .avatar-conductor {
+      background: rgba(45,107,228,0.15);
+      border: 2px solid var(--azul);
+      color: var(--azul);
+    }
+
+    .circulo-node .label {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .circulo-node .badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    .badge-c1 { background: rgba(45,107,228,0.2); color: var(--azul); }
+    .badge-c2 { background: rgba(0,201,167,0.2); color: var(--teal); }
+
+    .circulo-connector {
+      flex: 0 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .connector-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+      position: relative;
+    }
+
+    .connector-dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .circulos-disclaimer {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 16px;
+    }
+
+    /* ─── DIFERENCIADOR TABLE ─── */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+
+    .comp-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      padding: 0 16px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .comp-table th:not(:first-child) {
+      text-align: center;
+    }
+
+    .comp-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.65);
+    }
+
+    .comp-table td:not(:first-child) {
+      text-align: center;
+    }
+
+    .comp-table tr.viax-row td {
+      background: rgba(0,201,167,0.07);
+      color: var(--blanco);
+      font-weight: 600;
+    }
+
+    .comp-table tr.viax-row td:first-child {
+      border-radius: 10px 0 0 10px;
+      color: var(--teal);
+    }
+
+    .comp-table tr.viax-row td:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+
+    .check { color: var(--teal); font-size: 16px; }
+    .cross { color: rgba(255,255,255,0.2); font-size: 16px; }
+
+    /* ─── MÉTRICAS ─── */
+    .metricas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .metrica-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    .metrica-numero {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metrica-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.4;
+    }
+
+    .metrica-card.highlight {
+      background: rgba(45,107,228,0.1);
+      border-color: rgba(45,107,228,0.25);
+    }
+
+    /* ─── REVENUE LINES ─── */
+    .revenue-list {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .revenue-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color 0.2s ease;
+    }
+
+    .revenue-item:hover {
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .revenue-badge {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: rgba(45,107,228,0.18);
+      color: var(--azul);
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .revenue-badge.año2 {
+      background: rgba(0,201,167,0.15);
+      color: var(--teal);
+    }
+
+    .revenue-badge.año3 {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.5);
+    }
+
+    .revenue-content h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blanco);
+      margin-bottom: 3px;
+    }
+
+    .revenue-content p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.45;
+    }
+
+    .revenue-amount {
+      flex-shrink: 0;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--teal);
+      margin-left: auto;
+      padding-left: 16px;
+      white-space: nowrap;
+    }
+
+    /* ─── SEED ─── */
+    .seed-box {
+      margin-top: 40px;
+      background: linear-gradient(135deg, rgba(45,107,228,0.12) 0%, rgba(0,201,167,0.08) 100%);
+      border: 1px solid rgba(45,107,228,0.3);
+      border-radius: 20px;
+      padding: 36px;
+    }
+
+    .seed-amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      font-weight: 400;
+      color: var(--blanco);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .seed-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 32px;
+    }
+
+    .seed-breakdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .seed-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .seed-pct {
+      font-weight: 600;
+      color: var(--azul);
+      font-size: 13px;
+      flex-shrink: 0;
+      width: 32px;
+    }
+
+    /* ─── HITOS ─── */
+    .hitos-list {
+      margin-top: 40px;
+      position: relative;
+    }
+
+    .hitos-list::before {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hito-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .hito-dot {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      z-index: 1;
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+
+    .hito-dot.active {
+      background: rgba(0,201,167,0.12);
+      border-color: rgba(0,201,167,0.4);
+      color: var(--teal);
+    }
+
+    .hito-content {
+      padding-top: 10px;
+    }
+
+    .hito-content h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blanco);
+      margin-bottom: 3px;
+    }
+
+    .hito-content p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ─── QUOTE ─── */
+    .quote-block {
+      margin: 0;
+      padding: 48px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .quote-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--blanco);
+      line-height: 1.4;
+      max-width: 560px;
+      margin: 0 auto 20px;
+    }
+
+    .quote-attr {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ─── FOUNDER ─── */
+    .founder-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 32px;
+      margin-top: 40px;
+    }
+
+    .founder-avatar {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--azul), var(--teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--blanco);
+    }
+
+    .founder-info h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--blanco);
+      margin-bottom: 4px;
+    }
+
+    .founder-info .role {
+      font-size: 13px;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .founder-info p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.55;
+    }
+
+    /* ─── CONTACT CTA ─── */
+    .contact-section {
+      text-align: center;
+      padding: 80px 0 100px;
+    }
+
+    .contact-section .section-title {
+      margin-bottom: 12px;
+    }
+
+    .contact-section p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 36px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 14px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .cta-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+    }
+
+    .footer-legal {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ─── MVP BADGE ─── */
+    .mvp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,201,167,0.1);
+      border: 1px solid rgba(0,201,167,0.25);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--teal);
+      margin-top: 32px;
+    }
+
+    .mvp-badge .pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 1.5s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      section { padding: 60px 0; }
+      .hero { padding: 72px 0 60px; }
+
+      .problema-grid { grid-template-columns: 1fr; }
+      .metricas-grid { grid-template-columns: 1fr 1fr; }
+
+      .revenue-item { flex-wrap: wrap; }
+      .revenue-amount { margin-left: 0; padding-left: 0; }
+
+      .seed-breakdown { grid-template-columns: 1fr; }
+
+      .comp-table { font-size: 12px; }
+      .comp-table th, .comp-table td { padding: 10px 8px; }
+
+      .circulos-visual { flex-direction: column; gap: 16px; }
+      .circulo-connector { transform: rotate(90deg); width: 40px; }
+
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+
+      .cta-group { flex-direction: column; align-items: center; }
+      .cta-primary, .cta-secondary { width: 100%; justify-content: center; }
+
+      .founder-block { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+
+    <div class="logo-lockup">
+      <div class="logo-icon">
+        <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 18 Q8 8 13 12 Q18 16 22 6" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <circle cx="4" cy="18" r="2.5" fill="#00C9A7"/>
+          <circle cx="13" cy="12" r="2" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="22" cy="6" r="2.5" fill="white"/>
+        </svg>
+      </div>
+      <span class="logo-wordmark">viax</span>
+    </div>
+
+    <p class="hero-eyebrow">Carpooling de confianza · CDMX · 2025</p>
+
+    <h1 class="hero-headline">
+      El aventón de alguien<br><em>que ya conoces.</em>
+    </h1>
+
+    <p class="hero-sub">
+      En CDMX el 80% de los autos van solos al trabajo. Viax conecta a profesionistas que ya comparten ruta y red social — pero no lo saben.
+    </p>
+
+    <div class="hero-pills">
+      <span class="pill"><span class="dot"></span>Solo CDMX en V1</span>
+      <span class="pill"><span class="dot"></span>Aventon voluntario — sin SCT</span>
+      <span class="pill"><span class="dot"></span>Prototipo funcional live</span>
+      <span class="pill"><span class="dot"></span>Seed $2.5M MXN</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#contacto" class="cta-primary">
+        Hablar con el equipo
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="mvp-badge">
+        <span class="pulse"></span>
+        Prototipo live · viax-app.vercel.app
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     EL PROBLEMA
+════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-eyebrow">El problema</p>
+      <h2 class="section-title">CDMX tiene un problema de movilidad que ninguna app ha resuelto</h2>
+      <p class="section-body">Uber es caro para usarlo todos los días. El Metro no llega a donde vives. Y nadie confía en subirse al auto de un desconocido.</p>
+    </div>
+
+    <div class="problema-grid fade-up">
+      <div class="problema-card">
+        <div class="icon">🚗</div>
+        <h3>Autos vacíos</h3>
+        <p>El 80% de los vehículos en hora pico circulan con un solo ocupante hacia las mismas zonas corporativas.</p>
+      </div>
+      <div class="problema-card">
+        <div class="icon">💸</div>
+        <h3>Uber inviable</h3>
+        <p>$150–$400 MXN por trayecto. Usar Uber todos los días cuesta más de $6,000 MXN al mes.</p>
+      </div>
+      <div class="problema-card">
+        <div class="icon">🚌</div>
+        <h3>Transporte público</h3>
+        <p>No llega a colonias residenciales de clase media donde vive el profesionista de 25 a 45 años.</p>
+      </div>
+      <div class="problema-card">
+        <div class="icon">⚠️</div>
+        <h3>Desconfianza</h3>
+        <p>La seguridad en apps de transporte sigue siendo el problema #1, especialmente para mujeres.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     LA SOLUCIÓN — CÍRCULOS
+════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-eyebrow">La solución</p>
+      <h2 class="section-title">Confianza en dos grados.</h2>
+      <p class="section-body">La seguridad no es un feature técnico — es la consecuencia de viajar dentro de tu red social verificada. Solo hay dos tipos de conexiones posibles en Viax.</p>
+    </div>
+
+    <div class="circulos-visual fade-up">
+      <div class="circulo-node">
+        <div class="avatar avatar-pasajero">AM</div>
+        <div class="label">Pasajero</div>
+        <div class="badge badge-c2">Círculo 2</div>
+      </div>
+      <div class="circulo-connector">
+        <div class="connector-line"><span class="connector-dot"></span></div>
+      </div>
+      <div class="circulo-node">
+        <div class="avatar avatar-intermediario">SL</div>
+        <div class="label">Contacto en común</div>
+        <div class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);">Aprueba</div>
+      </div>
+      <div class="circulo-connector">
+        <div class="connector-line"><span class="connector-dot"></span></div>
+      </div>
+      <div class="circulo-node">
+        <div class="avatar avatar-conductor">CR</div>
+        <div class="label">Conductor</div>
+        <div class="badge badge-c1">Círculo 1</div>
+      </div>
+    </div>
+    <p class="circulos-disclaimer fade-up">Un contacto en común debe aprobar antes de que el viaje ocurra. Sin conexión social verificada, no hay match posible.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     DIFERENCIADOR
+════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-eyebrow">Por qué Viax</p>
+      <h2 class="section-title">Uber conecta desconocidos.<br>Viax verifica la relación.</h2>
+    </div>
+
+    <div class="fade-up">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Plataforma</th>
+            <th>Verifica identidad</th>
+            <th>Verifica relación</th>
+            <th>Commute diario</th>
+            <th>App móvil</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Uber / DiDi</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>BlaBlaCar</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>Waze Carpool</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr class="viax-row">
+            <td>★ viax</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MÉTRICAS FINANCIERAS
+════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-eyebrow">Proyecciones</p>
+      <h2 class="section-title">Rentabilidad en el Año 2.</h2>
+      <p class="section-body">El modelo de negocio no depende del volumen de transacciones — depende del acceso a un segmento premium con alta frecuencia de uso.</p>
+    </div>
+
+    <div class="metricas-grid fade-up">
+      <div class="metrica-card">
+        <div class="metrica-numero">2,400</div>
+        <div class="metrica-label">Usuarios activos<br>al cierre del Año 1</div>
+      </div>
+      <div class="metrica-card highlight">
+        <div class="metrica-numero">+$0.8M</div>
+        <div class="metrica-label">EBITDA positivo<br>Año 2 (MXN)</div>
+      </div>
+      <div class="metrica-card">
+        <div class="metrica-numero">45,000</div>
+        <div class="metrica-label">Usuarios activos<br>Año 3 · GDL + MTY</div>
+      </div>
+      <div class="metrica-card">
+        <div class="metrica-numero">$85</div>
+        <div class="metrica-label">CAC MXN<br>Costo de adquisición</div>
+      </div>
+      <div class="metrica-card">
+        <div class="metrica-numero">4.9×</div>
+        <div class="metrica-label">LTV:CAC ratio<br>Año 2</div>
+      </div>
+      <div class="metrica-card">
+        <div class="metrica-numero">$28M</div>
+        <div class="metrica-label">Ingresos MXN<br>Año 3 (~$1.4M USD)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MODELO DE NEGOCIO
+════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-eyebrow">Modelo de negocio</p>
+      <h2 class="section-title">Cuatro fuentes de ingreso. La primera desde el Mes 6.</h2>
+    </div>
+
+    <div class="revenue-list fade-up">
+      <div class="revenue-item">
+        <span class="revenue-badge">Año 1</span>
+        <div class="revenue-content">
+          <h4>Publicidad in-app</h4>
+          <p>Banners contextuales y push post-viaje. $50–80 MXN por usuario activo al mes.</p>
+        </div>
+        <span class="revenue-amount">$360K</span>
+      </div>
+      <div class="revenue-item">
+        <span class="revenue-badge">Año 1</span>
+        <div class="revenue-content">
+          <h4>Convenios con marcas</h4>
+          <p>Gasolineras, cafés, gimnasios: $8K–$35K MXN/mes por marca en el programa de lealtad.</p>
+        </div>
+        <span class="revenue-amount">$440K</span>
+      </div>
+      <div class="revenue-item">
+        <span class="revenue-badge año2">Año 2</span>
+        <div class="revenue-content">
+          <h4>Membresía Premium</h4>
+          <p>$99 MXN/mes. Filtros avanzados, prioridad en matching, estadísticas de ruta personalizadas.</p>
+        </div>
+        <span class="revenue-amount">$1.2M</span>
+      </div>
+      <div class="revenue-item">
+        <span class="revenue-badge año3">Año 3</span>
+        <div class="revenue-content">
+          <h4>Datos de movilidad anonimizados</h4>
+          <p>Reportes para empresas, inmobiliarias y gobierno. $50K–$200K MXN por reporte.</p>
+        </div>
+        <span class="revenue-amount">$5.5M</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     RONDA SEED
+════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-eyebrow">Lo que buscamos</p>
+      <h2 class="section-title">Ronda Seed.<br>12 meses de runway.</h2>
+      <p class="section-body">El objetivo de la Seed no es escalar — es demostrar el modelo con métricas reales de retención de una empresa piloto.</p>
+    </div>
+
+    <div class="seed-box fade-up">
+      <div class="seed-amount">$2.5M MXN</div>
+      <div class="seed-sub">≈ $125,000 USD · Estructurado como SAPI de CV</div>
+
+      <div class="seed-breakdown">
+        <div class="seed-line"><span class="seed-pct">36%</span>Desarrollo MVP (iOS + Android)</div>
+        <div class="seed-line"><span class="seed-pct">24%</span>Salarios equipo fundador (6 meses)</div>
+        <div class="seed-line"><span class="seed-pct">14%</span>Infraestructura cloud + Diseño UX</div>
+        <div class="seed-line"><span class="seed-pct">10%</span>Marketing — piloto empresa 1</div>
+        <div class="seed-line"><span class="seed-pct">10%</span>Legal (SAPI + TyC + privacidad)</div>
+        <div class="seed-line"><span class="seed-pct">6%</span>Reserva operativa</div>
+      </div>
+    </div>
+
+    <!-- Hitos -->
+    <div style="margin-top:48px;" class="fade-up">
+      <p class="section-eyebrow">Hitos para Serie A</p>
+    </div>
+
+    <div class="hitos-list fade-up">
+      <div class="hito-item">
+        <div class="hito-dot active">M1–2</div>
+        <div class="hito-content">
+          <h4>Constitución legal + empresa piloto firmada</h4>
+          <p>SAPI de CV constituida · TyC + política de privacidad · LOI firmada con empresa piloto</p>
+        </div>
+      </div>
+      <div class="hito-item">
+        <div class="hito-dot">M3</div>
+        <div class="hito-content">
+          <h4>Lanzamiento piloto cerrado · 200 usuarios activos</h4>
+          <p>Primera empresa, 200 empleados, commute activo con data real</p>
+        </div>
+      </div>
+      <div class="hito-item">
+        <div class="hito-dot">M4–5</div>
+        <div class="hito-content">
+          <h4>3 marcas aliadas activas · Primeros ingresos publicitarios</h4>
+          <p>Programa de lealtad operativo con beneficios reales</p>
+        </div>
+      </div>
+      <div class="hito-item">
+        <div class="hito-dot">M6</div>
+        <div class="hito-content">
+          <h4>500+ usuarios · Retención >70% · NPS >50</h4>
+          <p>Métricas que habilitan la conversación de Serie A</p>
+        </div>
+      </div>
+      <div class="hito-item">
+        <div class="hito-dot">M12</div>
+        <div class="hito-content">
+          <h4>5 empresas · 2,400 usuarios · Serie A ($15M MXN)</h4>
+          <p>Expansión a Guadalajara + Monterrey</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     QUOTE
+════════════════════════════════════════════ -->
+<section class="quote-block">
+  <div class="container fade-up" style="text-align:center;">
+    <p class="quote-text">"No estamos construyendo otra app de transporte. Estamos formalizando algo que México ya hace — el aventón de confianza — y llevándolo a escala."</p>
+    <p class="quote-attr">Diego Valdivia · Fundador, Viax</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FUNDADOR
+════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-eyebrow">El equipo</p>
+      <h2 class="section-title">Prototipo funcional construido en 1 día.</h2>
+    </div>
+
+    <div class="founder-block fade-up">
+      <div class="founder-avatar">DV</div>
+      <div class="founder-info">
+        <h3>Diego Valdivia</h3>
+        <div class="role">Fundador · CEO · Viax</div>
+        <p>Construyó el prototipo funcional en un día — solo, sin presupuesto, con IA como co-desarrollador. Live en viax-app.vercel.app. Stack: Next.js + Supabase + Vercel + Claude Code. Integración SMS y matching en desarrollo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CONTACTO
+════════════════════════════════════════════ -->
+<section class="contact-section" id="contacto">
+  <div class="container fade-up">
+    <p class="section-eyebrow">¿Listo para hablar?</p>
+    <h2 class="section-title">Comparte el camino.</h2>
+    <p>Si buscas una startup con modelo claro, tracción real y un fundador que ejecuta — esto es para ti.</p>
+
+    <div class="cta-group">
+      <a href="mailto:diegovaldivia26@gmail.com" class="cta-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="white" stroke-width="1.5"/><path d="M1 5l7 5 7-5" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Escribir al fundador
+      </a>
+      <a href="https://viax-app.vercel.app/login?dev=viax2025" target="_blank" class="cta-secondary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5C6 4 5 6 5 8s1 4 3 6.5M8 1.5C10 4 11 6 11 8s-1 4-3 6.5M1.5 8h13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Ver MVP live
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+    <span class="footer-logo">viax · comparte el camino.</span>
+    <span class="footer-legal">Confidencial · CDMX · 2025</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll-triggered fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
