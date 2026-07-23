@@ -1,0 +1,295 @@
+<!doctype html>
+<!--
+  BORRADOR — Revisar con asesoría legal antes de publicar.
+  Reemplazar los campos entre [CORCHETES] (razón social, RFC, domicilio, correos).
+-->
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Términos y Condiciones — viaxi</title>
+  <meta name="description" content="Términos y Condiciones de uso de viaxi, la app de aventones dentro de tu red de confianza." />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent: #2d6be4;
+      --accent-hover: #1f54c0;
+      --surface-accent: #eaf1fd;
+      --bg-page: #ffffff;
+      --surface-card: #f5f5f5;
+      --border-hairline: #dbdbdb;
+      --text-muted: #8c8c8c;
+      --text-body: #000000;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+      color: var(--text-body);
+      background: var(--bg-page);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 860px; margin: 0 auto; padding: 24px;
+    }
+    .wordmark { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--text-body); }
+    .wordmark:hover { text-decoration: none; }
+    .topbar a.back { font-weight: 600; font-size: 14px; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 24px 24px 64px; }
+    .eyebrow {
+      text-transform: uppercase; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; color: var(--accent); margin: 0 0 12px;
+    }
+    h1 {
+      font-size: 44px; font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1.1; margin: 0 0 12px;
+    }
+    .meta { color: var(--text-muted); font-size: 14px; margin: 0 0 8px; }
+    .lede { font-size: 18px; margin: 24px 0 8px; }
+
+    h2 {
+      font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+      margin: 48px 0 12px; scroll-margin-top: 24px;
+    }
+    h2 .num { color: var(--accent); font-weight: 800; margin-right: 10px; }
+    h3 { font-size: 18px; font-weight: 700; margin: 24px 0 8px; }
+    p, li { font-size: 16px; }
+    ul { padding-left: 22px; }
+    li { margin: 6px 0; }
+    hr { border: 0; border-top: 1px solid var(--border-hairline); margin: 40px 0; }
+
+    .callout {
+      background: var(--surface-accent); border-radius: var(--radius-md);
+      padding: 16px 20px; margin: 24px 0; font-size: 15px;
+    }
+    .card {
+      background: var(--surface-card); border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg); padding: 20px 24px; margin: 24px 0;
+    }
+    .toc { font-size: 15px; }
+    .toc a { display: block; padding: 3px 0; color: var(--text-body); }
+    .toc a:hover { color: var(--accent); text-decoration: none; }
+
+    footer {
+      background: var(--accent); color: #fff; margin-top: 64px;
+    }
+    footer .inner { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+    footer .fm { font-weight: 800; font-size: 20px; }
+    footer a { color: #fff; opacity: 0.92; font-size: 14px; margin-right: 20px; }
+    footer a:hover { opacity: 1; }
+    footer .legal { margin-top: 20px; font-size: 13px; opacity: 0.8; }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 34px; }
+      h2 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="/">viaxi</a>
+    <a class="back" href="/">← Volver al inicio</a>
+  </header>
+
+  <main>
+    <p class="eyebrow">Legal</p>
+    <h1>Términos y Condiciones</h1>
+    <p class="meta">Última actualización: 23 de julio de 2026</p>
+
+    <p class="lede">
+      Bienvenido a <strong>viaxi</strong>. Estos Términos y Condiciones (los
+      “Términos”) regulan el uso de nuestra aplicación, sitio web y servicios
+      (en conjunto, la “Plataforma”). Al crear una cuenta o usar la Plataforma
+      aceptas estos Términos. Si no estás de acuerdo, no uses viaxi.
+    </p>
+
+    <div class="card toc">
+      <strong>Contenido</strong>
+      <a href="#que-es">1. Qué es viaxi</a>
+      <a href="#cuenta">2. Tu cuenta y elegibilidad</a>
+      <a href="#roles">3. Pilotos y Compañeros</a>
+      <a href="#circulos">4. Círculos de confianza y contactos</a>
+      <a href="#contribucion">5. Contribución a la gasolina</a>
+      <a href="#conducta">6. Conducta esperada</a>
+      <a href="#cancelaciones">7. Cancelaciones</a>
+      <a href="#responsabilidad">8. Naturaleza del servicio y responsabilidad</a>
+      <a href="#propiedad">9. Propiedad intelectual</a>
+      <a href="#suspension">10. Suspensión y terminación</a>
+      <a href="#cambios">11. Cambios a los Términos</a>
+      <a href="#ley">12. Ley aplicable y jurisdicción</a>
+      <a href="#contacto">13. Contacto</a>
+    </div>
+
+    <h2 id="que-es"><span class="num">01</span>Qué es viaxi</h2>
+    <p>
+      viaxi es una <strong>plataforma tecnológica de intermediación</strong> que
+      conecta a personas que ya se conocen —dentro de su red social de
+      confianza— para compartir el camino en trayectos recurrentes al trabajo (un
+      “aventón”). Un <strong>Piloto</strong> ofrece los lugares disponibles de su
+      ruta y un <strong>Compañero</strong> solicita sumarse.
+    </p>
+    <div class="callout">
+      viaxi <strong>no es una empresa de transporte</strong> ni presta servicios
+      de transporte de pasajeros. viaxi no opera vehículos, no emplea a los
+      Pilotos y no es parte del acuerdo de aventón entre usuarios. viaxi tampoco
+      cobra tarifas ni comisiones por los aventones, ni procesa pagos entre
+      usuarios. El aventón es un acuerdo voluntario entre el Piloto y el
+      Compañero; viaxi solo facilita el contacto.
+    </div>
+
+    <h2 id="cuenta"><span class="num">02</span>Tu cuenta y elegibilidad</h2>
+    <ul>
+      <li>Debes ser mayor de <strong>18 años</strong> y tener capacidad legal para contratar.</li>
+      <li>La información que proporcionas debe ser <strong>verídica, completa y actualizada</strong>.</li>
+      <li>Para usar ciertas funciones deberás <strong>verificar tu identidad</strong> (por ejemplo, con una identificación oficial y una selfie). El detalle de estos datos se describe en el <a href="/privacy/integral">Aviso de Privacidad</a>.</li>
+      <li>Tu cuenta es <strong>personal e intransferible</strong>. Eres responsable de la actividad realizada con tus credenciales y de mantenerlas seguras.</li>
+      <li>Solo se permite <strong>una cuenta por persona</strong>. Podemos rechazar, suspender o cancelar cuentas con información falsa o duplicada.</li>
+    </ul>
+
+    <h2 id="roles"><span class="num">03</span>Pilotos y Compañeros</h2>
+    <h3>Si eres Piloto</h3>
+    <ul>
+      <li>Debes contar con <strong>licencia de conducir vigente</strong> y ser el conductor del vehículo que registres.</li>
+      <li>El vehículo debe estar en <strong>condiciones seguras y legales</strong> de circulación, con las verificaciones y el seguro que exija la normatividad aplicable.</li>
+      <li>Debes respetar el <strong>Reglamento de Tránsito</strong> y no exceder la capacidad de pasajeros permitida.</li>
+      <li>El número de lugares que ofreces y el monto sugerido de contribución son referencias tuyas, no una tarifa.</li>
+    </ul>
+    <h3>Si eres Compañero</h3>
+    <ul>
+      <li>Solo puedes solicitar aventones con Pilotos que estén dentro de tu red de confianza.</li>
+      <li>Debes presentarte en el punto y hora acordados y tratar con respeto al Piloto y a los demás Compañeros.</li>
+    </ul>
+
+    <h2 id="circulos"><span class="num">04</span>Círculos de confianza y contactos</h2>
+    <p>
+      viaxi solo muestra y permite aventones <strong>dentro de tu red verificada</strong>
+      (Círculo 1 = contacto directo; Círculos posteriores = conexiones en común).
+      Para construir tu red, con tu autorización, viaxi puede usar los contactos
+      de tu dispositivo para identificar coincidencias con otras personas
+      usuarias. El tratamiento de estos datos se rige por el
+      <a href="/privacy/integral">Aviso de Privacidad</a>. Puedes revocar este
+      acceso en cualquier momento desde la app.
+    </p>
+
+    <h2 id="contribucion"><span class="num">05</span>Contribución a la gasolina</h2>
+    <p>
+      El aventón no tiene costo ni tarifa. El Compañero puede
+      <strong>aportar de forma voluntaria</strong> a los gastos de gasolina del
+      trayecto, <strong>en efectivo</strong> y directamente al Piloto. viaxi puede
+      mostrar un <strong>monto sugerido</strong> calculado como referencia a
+      partir de la distancia del tramo del Compañero; ese monto
+      <strong>no es una contraprestación</strong> por un servicio de transporte,
+      no lo determina ni lo cobra viaxi, y las partes pueden acordar otra cosa.
+      viaxi no interviene, retiene ni procesa dinero entre usuarios.
+    </p>
+
+    <h2 id="conducta"><span class="num">06</span>Conducta esperada</h2>
+    <p>Al usar viaxi te comprometes a <strong>no</strong>:</p>
+    <ul>
+      <li>Usar la Plataforma con fines comerciales, de transporte remunerado o de lucro.</li>
+      <li>Discriminar, acosar, amenazar o poner en riesgo a cualquier persona.</li>
+      <li>Conducir bajo los efectos de alcohol o sustancias, o exceder la capacidad del vehículo.</li>
+      <li>Suplantar identidades, crear cuentas falsas o falsear tu información de verificación.</li>
+      <li>Recolectar datos de otras personas usuarias o usar la Plataforma para fines distintos al aventón.</li>
+      <li>Vulnerar la seguridad de la Plataforma o infringir la ley.</li>
+    </ul>
+
+    <h2 id="cancelaciones"><span class="num">07</span>Cancelaciones</h2>
+    <p>
+      Pilotos y Compañeros pueden cancelar un aventón antes de que inicie. Te
+      pedimos avisar con la mayor anticipación posible por respeto a los demás.
+      Las cancelaciones reiteradas o las ausencias sin aviso pueden afectar tu
+      reputación en la Plataforma y, en casos graves, derivar en la suspensión
+      de tu cuenta.
+    </p>
+
+    <h2 id="responsabilidad"><span class="num">08</span>Naturaleza del servicio y limitación de responsabilidad</h2>
+    <p>
+      viaxi actúa únicamente como <strong>intermediario tecnológico</strong>. La
+      decisión de ofrecer, aceptar o realizar un aventón, así como la conducción
+      del vehículo, corresponden exclusivamente a las personas usuarias, quienes
+      lo hacen <strong>bajo su propia responsabilidad y riesgo</strong>.
+    </p>
+    <p>
+      La Plataforma se ofrece “tal cual” y “según disponibilidad”. En la máxima
+      medida que permita la legislación aplicable, viaxi no será responsable por:
+    </p>
+    <ul>
+      <li>La conducta, actos u omisiones de Pilotos, Compañeros o terceros.</li>
+      <li>El estado, la seguridad o la legalidad de los vehículos.</li>
+      <li>Accidentes, daños, pérdidas, robos o lesiones ocurridos con motivo del aventón.</li>
+      <li>Incumplimientos entre usuarios respecto de la contribución voluntaria o los horarios.</li>
+    </ul>
+    <p>
+      Nada en estos Términos limita responsabilidades que no puedan excluirse
+      conforme a la ley. La verificación de identidad y los Círculos de confianza
+      son herramientas para reducir riesgos, pero <strong>no garantizan</strong>
+      la conducta de ninguna persona.
+    </p>
+
+    <h2 id="propiedad"><span class="num">09</span>Propiedad intelectual</h2>
+    <p>
+      La marca viaxi, el logotipo, el software, el diseño y el contenido de la
+      Plataforma son propiedad de [RAZÓN SOCIAL] o de sus titulares y están
+      protegidos por la ley. No puedes copiarlos, modificarlos ni usarlos sin
+      autorización por escrito.
+    </p>
+
+    <h2 id="suspension"><span class="num">10</span>Suspensión y terminación</h2>
+    <p>
+      Puedes cerrar tu cuenta cuando quieras. Podemos suspender o cancelar tu
+      acceso si incumples estos Términos, si detectamos actividad fraudulenta o
+      riesgosa, o si la ley lo requiere. La terminación no afecta las
+      obligaciones ya generadas entre usuarios.
+    </p>
+
+    <h2 id="cambios"><span class="num">11</span>Cambios a los Términos</h2>
+    <p>
+      Podemos actualizar estos Términos. Publicaremos la versión vigente en esta
+      página y actualizaremos la fecha de “Última actualización”. Si los cambios
+      son relevantes, te lo haremos saber por medios razonables. El uso continuo
+      de la Plataforma implica la aceptación de los Términos vigentes.
+    </p>
+
+    <h2 id="ley"><span class="num">12</span>Ley aplicable y jurisdicción</h2>
+    <p>
+      Estos Términos se rigen por las leyes de los Estados Unidos Mexicanos. Para
+      cualquier controversia, las partes se someten a los tribunales competentes
+      de la Ciudad de México, sin perjuicio de los derechos que la legislación de
+      protección al consumidor otorgue a las personas usuarias.
+    </p>
+
+    <h2 id="contacto"><span class="num">13</span>Contacto</h2>
+    <p>
+      viaxi es operado por <strong>[RAZÓN SOCIAL]</strong>, con domicilio en
+      [DOMICILIO]. Para dudas sobre estos Términos escríbenos a
+      <a href="mailto:hola@viaxi.app">hola@viaxi.app</a>.
+    </p>
+  </main>
+
+  <footer>
+    <div class="inner">
+      <div class="fm">viaxi</div>
+      <p style="opacity:.9; margin:8px 0 20px;">Comparte el camino.</p>
+      <nav>
+        <a href="/terms">Términos</a>
+        <a href="/privacy/integral">Privacidad</a>
+        <a href="/codigo-de-conducta">Código de conducta</a>
+      </nav>
+      <div class="legal">© 2026 viaxi. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+</body>
+</html>
