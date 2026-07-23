@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>viaxi — El aventón de alguien que ya conoces</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98B50V2BRK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-98B50V2BRK');
+</script>
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "wubl5y6572");
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
@@ -27,11 +42,11 @@
 
   /* ---------- type ---------- */
   h1,h2,h3{line-height:1.1;letter-spacing:-0.02em}
-  h1{font-size:clamp(38px,6vw,var(--text-4xl));font-weight:800}
+  h1{font-size:clamp(48px,10vw,72px);font-weight:800}
   h2{font-size:clamp(30px,4.5vw,var(--text-2xl));font-weight:800}
   h3{font-size:var(--text-lg);font-weight:700}
   .em{font-style:italic;color:var(--accent)}
-  .eyebrow{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:16px}
+  .eyebrow{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:14px}
   .eyebrow.muted{color:var(--text-muted)}
   .lead{font-size:var(--text-md);color:var(--text-muted);max-width:560px}
   .center{text-align:center}.center .lead{margin:0 auto}
@@ -75,6 +90,11 @@
   .hero-note{margin-top:16px;font-size:var(--text-sm);color:var(--text-muted)}
   .hero .foto{aspect-ratio:4/5;max-height:520px;width:100%}
 
+  @media(max-width:720px){
+    .hero{padding:56px 0 40px}
+    .hero .foto{margin:8px -24px 0;width:calc(100% + 48px);border-radius:0;aspect-ratio:4/5}
+    .circ-wrap{margin-top:36px}
+  }
   /* ---------- triada ---------- */
   .triada{border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);padding:28px 0}
   .triada-grid{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
@@ -110,15 +130,15 @@
   .step p{color:var(--text-muted);font-size:var(--text-sm)}
 
   /* ---------- circulos ---------- */
-  .circ-wrap{display:flex;align-items:center;justify-content:center;gap:0;margin-top:48px;flex-wrap:wrap}
-  .circ-node{text-align:center;padding:0 8px}
-  .circ-avatar{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--text-md);margin:0 auto 10px}
+  .circ-wrap{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-top:48px;flex-wrap:nowrap}
+  .circ-node{text-align:center;padding:0 4px;flex:0 1 auto;min-width:0}
+  .circ-avatar{width:clamp(54px,15vw,72px);height:clamp(54px,15vw,72px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:clamp(15px,3.6vw,18px);margin:0 auto 10px}
   .circ-you{background:var(--accent);color:#fff}
   .circ-c1{background:var(--surface-accent);color:var(--accent);border:2px solid var(--accent)}
   .circ-c2{background:var(--surface-card);color:var(--text-muted);border:2px solid var(--border-hairline)}
   .circ-node .lbl{font-size:var(--text-sm);font-weight:700}
   .circ-node .sub{font-size:var(--text-xs);color:var(--text-muted)}
-  .circ-line{width:56px;height:2px;background:var(--border-hairline)}
+  .circ-line{flex:1 1 12px;min-width:8px;max-width:56px;height:2px;background:var(--border-hairline);margin-top:clamp(26px,7.5vw,35px)}
   .circ-note{text-align:center;color:var(--text-muted);font-size:var(--text-sm);margin-top:28px}
 
   /* ---------- calculadora ---------- */
@@ -156,16 +176,19 @@
   .proof-card p{font-size:var(--text-sm);color:var(--text-muted);margin-top:8px}
 
   /* ---------- faq ---------- */
-  .faq-list{max-width:720px;margin:48px auto 0}
-  details{border-bottom:1px solid var(--border-hairline)}
-  summary{cursor:pointer;padding:20px 0;font-weight:700;font-size:var(--text-md);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq-list{max-width:840px;margin:44px 0 0}
+  details{border-bottom:2px solid var(--border-hairline)}
+  summary{cursor:pointer;padding:26px 0;font-weight:800;font-size:clamp(19px,2.4vw,26px);letter-spacing:-0.01em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
   summary::-webkit-details-marker{display:none}
-  summary svg{flex-shrink:0;color:var(--text-muted);transition:transform .2s var(--ease)}
+  summary svg{flex-shrink:0;color:var(--accent);transition:transform .2s var(--ease)}
   details[open] summary svg{transform:rotate(45deg)}
-  details p{padding:0 0 20px;color:var(--text-muted);font-size:var(--text-sm);max-width:640px}
+  details p{padding:0 0 26px;color:#444;font-size:var(--text-md);max-width:680px}
 
   /* ---------- cta final ---------- */
-  .cta-final{background:var(--accent);color:#fff}
+  .cta-final{background:var(--accent);color:#fff;padding:clamp(80px,10vw,130px) 0}
+  .cierre-titulo{font-size:clamp(48px,8vw,104px);line-height:.98;letter-spacing:-0.03em;max-width:1000px;margin-bottom:44px}
+  .btn-blanco{background:#fff;color:var(--text-body) !important;font-size:clamp(18px,2.2vw,22px);padding:20px 42px}
+  .btn-blanco:hover{background:var(--surface-accent)}
   .cta-final .eyebrow{color:rgba(255,255,255,.7)}
   .cta-final .lead{color:rgba(255,255,255,.8)}
   .cta-final .em{color:#fff}
@@ -176,6 +199,9 @@
   footer a{color:var(--text-muted);text-decoration:none;margin-right:20px}
   footer a:hover{color:var(--accent)}
 
+  .social-row{display:flex;gap:12px;margin-top:14px}
+  .social-row a{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--border-hairline);border-radius:var(--radius-pill);color:var(--text-body);text-decoration:none;font-size:var(--text-sm);font-weight:600;margin-right:0}
+  .social-row a:hover{border-color:var(--accent);color:var(--accent)}
   /* ---------- motion ---------- */
   body.js .fade{opacity:0;transform:translateY(14px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
   body.js .fade.in{opacity:1;transform:none}
@@ -192,7 +218,7 @@
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#calculadora">Calculadora</a>
       <a href="#faq">Preguntas</a>
-      <a class="btn btn-primary" href="#pre-registro">Pre-regístrate</a>
+      <a class="btn btn-primary" href="#pre-registro" data-cta="nav">Pre-regístrate</a>
     </div>
   </div>
 </nav>
@@ -201,12 +227,12 @@
 <header class="hero">
   <div class="container hero-grid">
     <div class="fade">
-      <p class="eyebrow">Carpooling de confianza · CDMX</p>
+      <p class="eyebrow">¿Sigues yendo solo al trabajo?</p>
       <h1>El aventón de alguien<br>que <span class="em">ya conoces</span>.</h1>
       <p class="lead">Comparte tu camino al trabajo con gente de tu red. Sin desconocidos, sin tarifas: solo una aportación voluntaria a la gasolina, entre conocidos.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#pre-registro">Quiero mi lugar</a>
-        <a class="btn btn-secondary" href="#como-funciona">Cómo funciona</a>
+        <a class="btn btn-primary" href="#pre-registro" data-cta="hero">Quiero mi lugar</a>
+        <a class="btn btn-secondary" href="#como-funciona" data-cta="hero_como_funciona">Cómo funciona</a>
       </div>
       <p class="hero-note">Lanzamos en septiembre. Pre-regístrate y entra con tu círculo.</p>
     </div>
@@ -229,8 +255,8 @@
 <section id="que-es">
   <div class="container">
     <div class="center fade">
-      <p class="eyebrow">Qué es Viaxi</p>
-      <h2>El aventón de toda la vida,<br><span class="em">organizado</span>.</h2>
+      <p class="eyebrow">Mucho gusto, somos Viaxi.</p>
+      <h2>El aventón de toda la vida,<br>ahora organizado.</h2>
       <p class="lead">En México siempre nos hemos dado aventones entre conocidos. Viaxi solo lo hace fácil: conecta tu ruta diaria al trabajo con la de tu red de confianza.</p>
     </div>
     <div class="cards-3 fade">
@@ -256,9 +282,9 @@
 <!-- ROLES -->
 <section style="padding-top:0">
   <div class="container">
-    <div class="center fade">
-      <p class="eyebrow">Dos formas de compartir</p>
-      <h2>¿Manejas o <span class="em">te sumas</span>?</h2>
+    <div class="fade">
+      <p class="eyebrow">Tú decides cómo entrarle.</p>
+      <h2>¿Manejas o te sumas?</h2>
     </div>
     <div class="roles-grid fade">
       <div class="role-card">
@@ -270,11 +296,11 @@
           <h3>Tu auto ya va para allá.</h3>
           <ul>
             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Publica tu ruta fija casa→trabajo una sola vez</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Acepta solo a gente de tu red de confianza</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Acepta solo a gente de tu red</li>
             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Recibe una aportación voluntaria a la gasolina</li>
             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Convierte el tráfico en buena compañía</li>
           </ul>
-          <a class="btn btn-primary" href="#pre-registro">Quiero ser Piloto</a>
+          <a class="btn btn-primary" href="#pre-registro" data-cta="rol_piloto">Quiero ser Piloto</a>
         </div>
       </div>
       <div class="role-card">
@@ -290,7 +316,7 @@
             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Aporta a la gasolina, mucho menos que una app de transporte</li>
             <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Ahorra hasta $3,000 MXN al mes</li>
           </ul>
-          <a class="btn btn-primary" href="#pre-registro">Quiero ser Compañero</a>
+          <a class="btn btn-primary" href="#pre-registro" data-cta="rol_companero">Quiero ser Compañero</a>
         </div>
       </div>
     </div>
@@ -301,8 +327,8 @@
 <section id="como-funciona" style="padding-top:0">
   <div class="container">
     <div class="fade">
-      <p class="eyebrow">Cómo funciona</p>
-      <h2>Tres pasos y <span class="em">listo</span>.</h2>
+      <p class="eyebrow">¿Y cómo funciona?</p>
+      <h2>Tres pasos, sin vueltas.</h2>
     </div>
     <div class="steps fade">
       <div class="step">
@@ -317,8 +343,8 @@
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <h3>Comparte el camino</h3>
-        <p>Se ponen de acuerdo, viajan juntos y el Compañero aporta a la gasolina. Directo, en efectivo, entre conocidos.</p>
+        <h3>Viajen juntos</h3>
+        <p>Se ponen de acuerdo, viajan y el Compañero aporta a la gasolina. Directo y en efectivo.</p>
       </div>
     </div>
   </div>
@@ -328,8 +354,8 @@
 <section style="padding-top:0">
   <div class="container">
     <div class="center fade">
-      <p class="eyebrow">Círculos de confianza</p>
-      <h2>Nadie fuera de tu red<br>puede <span class="em">encontrarte</span>.</h2>
+      <p class="eyebrow">Lo más importante:</p>
+      <h2>Nadie fuera de tu red<br>puede encontrarte.</h2>
     </div>
     <div class="circ-wrap fade">
       <div class="circ-node">
@@ -350,7 +376,7 @@
         <div class="sub">Amigo de tu amigo</div>
       </div>
     </div>
-    <p class="circ-note">Si no comparten conocidos, simplemente no existes para esa persona. Así de simple.</p>
+    <p class="circ-note">Si no comparten conocidos, simplemente no apareces en sus resultados — ni ellos en los tuyos.</p>
   </div>
 </section>
 
@@ -358,7 +384,7 @@
 <section class="calc-section" id="calculadora">
   <div class="container">
     <div class="center fade">
-      <p class="eyebrow">Calculadora</p>
+      <p class="eyebrow">Haz cuentas.</p>
       <h2>¿Cuánto te ahorra <span class="em">tu camino</span>?</h2>
       <p class="lead">Mueve los controles y mira lo que cambia entre irte solo en app de transporte o sumarte a un aventón.</p>
     </div>
@@ -408,11 +434,11 @@
 <!-- ZONAS + PROOF -->
 <section>
   <div class="container">
-    <div class="center fade">
-      <p class="eyebrow">Dónde arrancamos</p>
-      <h2>Hecho para el trayecto diario<br>en la <span class="em">CDMX</span>.</h2>
+    <div class="fade">
+      <p class="eyebrow">Empezamos por aquí:</p>
+      <h2>Hecho para el trayecto diario<br>en la CDMX.</h2>
     </div>
-    <div class="chips fade">
+    <div class="chips fade" style="justify-content:flex-start">
       <span class="chip">Roma</span><span class="chip">Condesa</span><span class="chip">Reforma</span>
       <span class="chip">Polanco</span><span class="chip">Santa Fe</span><span class="chip">Lomas</span>
       <span class="chip">Insurgentes</span>
@@ -442,9 +468,8 @@
 <!-- FAQ -->
 <section id="faq" style="padding-top:0">
   <div class="container">
-    <div class="center fade">
-      <p class="eyebrow">Preguntas frecuentes</p>
-      <h2>Lo que todos <span class="em">preguntan</span>.</h2>
+    <div class="fade">
+      <h2>Preguntas frecuentes</h2>
     </div>
     <div class="faq-list fade">
       <details>
@@ -477,11 +502,10 @@
 
 <!-- CTA FINAL -->
 <section class="cta-final">
-  <div class="container center fade">
-    <p class="eyebrow">Lanzamiento · Septiembre 2026</p>
-    <h2>Comparte el camino.<br>Empieza con <span class="em">tu círculo</span>.</h2>
-    <p class="lead" style="margin:20px auto 32px">Pre-regístrate, invita a tu gente y arranca septiembre con aventones de confianza.</p>
-    <a class="btn btn-inverse" href="#pre-registro">Pre-regístrate gratis</a>
+  <div class="container fade">
+    <p class="eyebrow">Nos vemos en septiembre.</p>
+    <h2 class="cierre-titulo">Comparte el camino. Empieza con <span class="em">tu círculo</span>.</h2>
+    <a class="btn btn-blanco" href="#pre-registro" data-cta="cta_final">Pre-regístrate gratis</a>
   </div>
 </section>
 
@@ -492,10 +516,19 @@
       <p style="margin-top:8px">Comparte el camino. · CDMX, México</p>
     </div>
     <div>
-      <a href="/terms">Términos</a>
-      <a href="/privacy/integral">Privacidad</a>
-      <a href="/codigo-de-conducta">Código de conducta</a>
-      <a href="https://instagram.com/viaxi.app">Instagram</a>
+      <div>
+        <a href="/terms">Términos</a>
+        <a href="/privacy/integral">Privacidad</a>
+        <a href="/codigo-de-conducta">Código de conducta</a>
+      </div>
+      <div class="social-row">
+        <a href="https://instagram.com/viaxi.app" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg> @viaxi.app</a>
+        <a href="https://facebook.com/viaxiapp" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a>
+        <a href="https://www.linkedin.com/company/viaxiapp/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
+        <!-- Activar cuando exista el perfil: reemplazar URL_TIKTOK
+        <a href="URL_TIKTOK" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.9 2.9 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-.88-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg> TikTok</a>
+        -->
+      </div>
     </div>
   </div>
   <div class="container" style="margin-top:24px;font-size:var(--text-xs)">
@@ -562,6 +595,76 @@
       });
     }
   }catch(e){ document.body.classList.remove('js'); }
+
+  // ---- Analytics de eventos (GA4) ----
+  try{
+    const track = (name, params) => { try{ if(typeof gtag === 'function') gtag('event', name, params || {}); }catch(e){} };
+
+    // Clicks en CTAs
+    document.querySelectorAll('[data-cta]').forEach(el => {
+      el.addEventListener('click', () => track('cta_click', { cta_location: el.dataset.cta }));
+    });
+
+    // Calculadora: primera interacción + estado al usarla
+    let calcUsed = false;
+    const markCalc = () => {
+      if(!calcUsed){ calcUsed = true; track('calc_first_interact'); }
+    };
+    ['km','dias'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.addEventListener('input', markCalc);
+    });
+    const segEl = document.getElementById('segComp');
+    if(segEl) segEl.addEventListener('click', markCalc);
+
+    // Pre-registro (conversión principal) — sin enviar el correo (PII)
+    const btnP = document.getElementById('btnPrereg');
+    if(btnP) btnP.addEventListener('click', () => {
+      const el = document.getElementById('email');
+      const valid = el && el.value && el.value.includes('@');
+      if(valid){
+        track('prereg_submit', {
+          km: +document.getElementById('km').value,
+          dias_semana: +document.getElementById('dias').value,
+          ahorro_estimado: document.getElementById('ahorroMes').textContent
+        });
+      } else {
+        track('prereg_invalid_email');
+      }
+    });
+
+    // FAQ: qué preguntas abren
+    document.querySelectorAll('details').forEach(d => {
+      d.addEventListener('toggle', () => {
+        if(d.open){
+          const q = d.querySelector('summary');
+          track('faq_open', { question: q ? q.textContent.replace('+','').trim().slice(0,90) : '' });
+        }
+      });
+    });
+
+    // Redes sociales
+    document.querySelectorAll('.social-row a').forEach(a => {
+      a.addEventListener('click', () => track('social_click', { network: a.textContent.trim() }));
+    });
+
+    // Vista de secciones clave
+    if('IntersectionObserver' in window){
+      const seen = new Set();
+      const secs = [['calculadora','#calculadora'],['faq','#faq'],['cta_final','.cta-final']];
+      const sio = new IntersectionObserver(es => es.forEach(e => {
+        if(e.isIntersecting && !seen.has(e.target.dataset.sec)){
+          seen.add(e.target.dataset.sec);
+          track('section_view', { section: e.target.dataset.sec });
+          sio.unobserve(e.target);
+        }
+      }), {threshold:.4});
+      secs.forEach(([name, sel]) => {
+        const el = document.querySelector(sel);
+        if(el){ el.dataset.sec = name; sio.observe(el); }
+      });
+    }
+  }catch(e){}
 </script>
 </body>
 </html>
