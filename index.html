@@ -720,10 +720,18 @@
         if(el) el.focus();
         return;
       }
+      // Read through a helper: a renamed or removed id must not throw here.
+      // It did — 'ahorroMes' no longer exists, the TypeError aborted the
+      // handler, and the button silently did nothing at all.
+      const txt = (id) => document.getElementById(id)?.textContent ?? undefined;
+      const num = (id) => {
+        const el = document.getElementById(id);
+        return el ? +el.value : undefined;
+      };
       track('prereg_submit', {
-        km: +document.getElementById('km').value,
-        dias_semana: +document.getElementById('dias').value,
-        ahorro_estimado: document.getElementById('ahorroMes').textContent
+        km: num('km'),
+        dias_semana: num('dias'),
+        ahorro_estimado: txt('mesComp'),
       });
       window.location.href =
         'https://pre-registro.viaxi.app/?email=' + encodeURIComponent(email);
