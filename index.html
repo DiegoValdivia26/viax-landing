@@ -204,7 +204,7 @@
   .proof-card p{font-size:var(--text-sm);color:var(--text-muted);margin-top:8px}
 
   /* ---------- faq ---------- */
-  .faq-list{max-width:840px;margin:44px 0 0}
+  .faq-list{margin:44px 0 0}/* No max-width: the rows and their dividers line up with the section's h2 and with every other section. The answers keep their own 680px measure below, so readability never depended on narrowing this. */
   details{border-bottom:2px solid var(--border-hairline)}
   summary{cursor:pointer;padding:26px 0;font-weight:800;font-size:clamp(19px,2.4vw,26px);letter-spacing:-0.01em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
   summary::-webkit-details-marker{display:none}
@@ -720,10 +720,18 @@
         if(el) el.focus();
         return;
       }
+      // Read through a helper: a renamed or removed id must not throw here.
+      // It did — 'ahorroMes' no longer exists, the TypeError aborted the
+      // handler, and the button silently did nothing at all.
+      const txt = (id) => document.getElementById(id)?.textContent ?? undefined;
+      const num = (id) => {
+        const el = document.getElementById(id);
+        return el ? +el.value : undefined;
+      };
       track('prereg_submit', {
-        km: +document.getElementById('km').value,
-        dias_semana: +document.getElementById('dias').value,
-        ahorro_estimado: document.getElementById('ahorroMes').textContent
+        km: num('km'),
+        dias_semana: num('dias'),
+        ahorro_estimado: txt('mesComp'),
       });
       window.location.href =
         'https://pre-registro.viaxi.app/?email=' + encodeURIComponent(email);
