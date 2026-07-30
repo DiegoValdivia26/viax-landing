@@ -204,7 +204,7 @@
   .proof-card p{font-size:var(--text-sm);color:var(--text-muted);margin-top:8px}
 
   /* ---------- faq ---------- */
-  .faq-list{max-width:840px;margin:44px 0 0}
+  .faq-list{margin:44px 0 0}/* No max-width: the rows and their dividers line up with the section's h2 and with every other section. The answers keep their own 680px measure below, so readability never depended on narrowing this. */
   details{border-bottom:2px solid var(--border-hairline)}
   summary{cursor:pointer;padding:26px 0;font-weight:800;font-size:clamp(19px,2.4vw,26px);letter-spacing:-0.01em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
   summary::-webkit-details-marker{display:none}
