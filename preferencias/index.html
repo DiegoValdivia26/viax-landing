@@ -1,0 +1,128 @@
+<!doctype html>
+<!--
+  One-click unsubscribe landing for links in email footers.
+
+  The reader has no session — they are coming from their inbox — so the signed
+  token in the query string is the credential. This page does nothing but hand
+  it to the API and report what happened.
+-->
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Preferencias de correo — viaxi</title>
+  <style>
+    :root{--blue:#2d6be4;--ink:#111;--body:#333;--mut:#8c8c8c;--line:#dbdbdb;--card:#fdfdfd;--bg:#f5f5f5}
+    @media (prefers-color-scheme:dark){
+      :root{--ink:#f2f2f2;--body:#c6cbd2;--mut:#9aa0a8;--line:#3a3d44;--card:#212329;--bg:#17181c;--blue:#7aa5f2}
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;
+      background:var(--bg);color:var(--body);
+      font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+    .card{width:100%;max-width:520px;background:var(--card);border:1px solid var(--line);
+      border-radius:12px;padding:32px}
+    h1{margin:0 0 12px;font-size:24px;line-height:1.25;letter-spacing:-.02em;color:var(--ink);font-weight:800}
+    p{margin:0 0 16px;font-size:15px;line-height:1.6}
+    .brand{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--blue);margin:0 0 24px}
+    button{appearance:none;border:0;border-radius:999px;background:var(--blue);color:#fff;
+      font:inherit;font-weight:700;font-size:15px;padding:14px 28px;cursor:pointer;width:100%}
+    button[disabled]{opacity:.55;cursor:default}
+    .ghost{background:transparent;color:var(--mut);border:1px solid var(--line);margin-top:10px}
+    .mut{color:var(--mut);font-size:13px}
+    a{color:var(--blue)}
+    [hidden]{display:none !important}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <p class="brand">viaxi</p>
+
+    <div id="ask">
+      <h1>Preferencias de correo</h1>
+      <p id="askText">¿Quieres dejar de recibir los resúmenes de tus viajes?</p>
+      <button id="go">Sí, dejar de recibirlos</button>
+      <button id="all" class="ghost">Dejar de recibir todos los correos</button>
+      <p class="mut" style="margin-top:16px">
+        Los avisos de tu cuenta —como el resultado de tu verificación de identidad— se siguen
+        enviando: son parte del servicio, no son promocionales.
+      </p>
+    </div>
+
+    <div id="done" hidden>
+      <h1>Listo</h1>
+      <p id="doneText"></p>
+      <p class="mut">Puedes volver a activarlos cuando quieras desde la app, en Ajustes → Notificaciones.</p>
+    </div>
+
+    <div id="bad" hidden>
+      <h1>Este enlace no es válido</h1>
+      <p>
+        Puede que esté incompleto por cómo lo abrió tu app de correo. Abre la app de Viaxi y ve a
+        <strong>Ajustes → Notificaciones</strong>: ahí puedes apagar lo que no quieras recibir.
+      </p>
+      <p class="mut">Si necesitas ayuda, escríbenos a <a href="mailto:hola@viaxi.app">hola@viaxi.app</a>.</p>
+    </div>
+  </main>
+
+  <script>
+    const API = 'https://api.viaxi.app/api/v1/notifications/unsubscribe';
+    const q = new URLSearchParams(location.search);
+    const token = q.get('t');
+    // The email decides what the primary button turns off; 'trips' is the only
+    // scope any template links to today.
+    const scope = q.get('scope') === 'all' ? 'all' : 'trips';
+
+    const show = (id) => {
+      for (const el of ['ask', 'done', 'bad']) {
+        document.getElementById(el).hidden = el !== id;
+      }
+    };
+
+    // A missing token is not a server error worth a round trip: tell them where
+    // the in-app switch is and stop.
+    if (!token) show('bad');
+
+    if (scope === 'all') {
+      document.getElementById('askText').textContent =
+        '¿Quieres dejar de recibir nuestros correos?';
+      document.getElementById('go').textContent = 'Sí, dejar de recibirlos';
+      document.getElementById('all').hidden = true;
+    }
+
+    async function unsubscribe(scope, button) {
+      const original = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Guardando…';
+      try {
+        const res = await fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, scope }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        document.getElementById('doneText').textContent =
+          scope === 'all'
+            ? 'Ya no vas a recibir nuestros correos.'
+            : 'Ya no vas a recibir resúmenes de viaje.';
+        show('done');
+      } catch (e) {
+        // Any failure lands on the same screen: from here the useful thing is
+        // the in-app switch, not a retry against an endpoint we cannot see.
+        show('bad');
+      } finally {
+        button.disabled = false;
+        button.textContent = original;
+      }
+    }
+
+    document.getElementById('go').addEventListener('click', (e) =>
+      unsubscribe(scope, e.currentTarget),
+    );
+    document.getElementById('all').addEventListener('click', (e) =>
+      unsubscribe('all', e.currentTarget),
+    );
+  </script>
+</body>
+</html>
