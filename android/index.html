@@ -1,0 +1,47 @@
+<!doctype html>
+<!--
+  Short link to the Android app. Same shape as /ios — see the note there.
+  STORE_URL is the one line to edit when the app is published.
+-->
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Descargar viaxi para Android</title>
+  <style>
+    :root{--blue:#2d6be4;--ink:#111;--body:#333;--mut:#8c8c8c;--line:#dbdbdb;--card:#fdfdfd;--bg:#f5f5f5}
+    @media (prefers-color-scheme:dark){
+      :root{--ink:#f2f2f2;--body:#c6cbd2;--mut:#9aa0a8;--line:#3a3d44;--card:#212329;--bg:#17181c;--blue:#7aa5f2}
+    }
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;
+      background:var(--bg);color:var(--body);
+      font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+    .card{width:100%;max-width:460px;background:var(--card);border:1px solid var(--line);
+      border-radius:12px;padding:32px;text-align:center}
+    .brand{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--blue);margin:0 0 20px}
+    h1{margin:0 0 12px;font-size:22px;line-height:1.3;color:var(--ink);font-weight:800;letter-spacing:-.02em}
+    p{margin:0;font-size:15px;line-height:1.6}
+    a{color:var(--blue)}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <p class="brand">viaxi</p>
+    <h1 id="title">Te estamos llevando a Google Play…</h1>
+    <p id="msg">Si no pasa nada, <a id="link" href="#">toca aquí</a>.</p>
+  </main>
+  <script>
+    const STORE_URL = '';
+
+    if (STORE_URL) {
+      document.getElementById('link').href = STORE_URL;
+      location.replace(STORE_URL);
+    } else {
+      document.getElementById('title').textContent = 'La app está por publicarse';
+      document.getElementById('msg').innerHTML =
+        'Estamos terminando la revisión en Google Play. Te avisamos por correo en cuanto puedas descargarla. ' +
+        '<br><br><a href="https://pre-registro.viaxi.app">Apartar mi lugar</a>';
+    }
+  </script>
+</body>
+</html>
