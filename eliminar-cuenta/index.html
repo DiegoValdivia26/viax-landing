@@ -1,111 +1,235 @@
 <!doctype html>
 <!--
-  Account deletion policy, public and reachable without an account.
+  Cómo eliminar tu cuenta — requisito de Google Play: una URL pública, abrible
+  sin sesión, que diga qué borra la eliminación y qué sobrevive a ella.
 
-  Google Play requires a URL it can open without signing in, naming the app and
-  saying what deletion removes and what survives it. Deletion itself stays in
-  the app, where the person is already authenticated: a web form that deletes an
-  account from an emailed link is a way to lose an account you did not mean to.
+  El borrado en sí se queda en la app, donde la persona ya está autenticada: un
+  formulario web que cierra cuentas desde un link de correo es una forma de
+  perder una cuenta sin querer.
 
-  English follows the Spanish, on the same page rather than a separate URL —
-  Play reviewers read English, users read Spanish, and one URL cannot go stale
-  against the other.
+  Mismo shell que /terms, /privacy/integral y /codigo-de-conducta.
 -->
 <html lang="es-MX">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eliminar tu cuenta de viaxi</title>
-  <meta name="description" content="Cómo eliminar tu cuenta de viaxi, qué datos se borran y cuáles se conservan." />
+  <title>Eliminar tu cuenta — viaxi</title>
+  <meta name="description" content="Cómo eliminar tu cuenta de viaxi, qué datos se eliminan, cuáles se conservan y por qué." />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet" />
   <style>
-    :root{--blue:#2d6be4;--ink:#111;--body:#333;--mut:#8c8c8c;--line:#dbdbdb;--card:#fdfdfd;--bg:#f5f5f5}
-    @media (prefers-color-scheme:dark){
-      :root{--ink:#f2f2f2;--body:#c6cbd2;--mut:#9aa0a8;--line:#3a3d44;--card:#212329;--bg:#17181c;--blue:#7aa5f2}
+    :root {
+      --accent: #2d6be4;
+      --accent-hover: #1f54c0;
+      --surface-accent: #eaf1fd;
+      --bg-page: #ffffff;
+      --surface-card: #f5f5f5;
+      --border-hairline: #dbdbdb;
+      --text-muted: #8c8c8c;
+      --text-body: #000000;
+      --radius-md: 8px;
+      --radius-lg: 16px;
     }
-    body{margin:0;min-height:100vh;display:grid;place-items:start center;padding:24px;
-      background:var(--bg);color:var(--body);
-      font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-    .card{width:100%;max-width:560px;background:var(--card);border:1px solid var(--line);
-      border-radius:12px;padding:32px;margin:24px 0}
-    .brand{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--blue);margin:0 0 20px}
-    h1{margin:0 0 8px;font-size:22px;line-height:1.3;color:var(--ink);font-weight:800;letter-spacing:-.02em}
-    h2{margin:28px 0 8px;font-size:16px;color:var(--ink);font-weight:700}
-    p{margin:0 0 12px;font-size:15px;line-height:1.6}
-    ul{margin:0 0 12px;padding-left:20px;font-size:15px;line-height:1.6}
-    li{margin-bottom:6px}
-    a{color:var(--blue)}
-    .steps{margin:0 0 12px;padding-left:20px;font-size:15px;line-height:1.6}
-    .note{font-size:13px;color:var(--mut);line-height:1.6}
-    hr{border:0;border-top:1px solid var(--line);margin:32px 0}
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+      color: var(--text-body);
+      background: var(--bg-page);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 860px; margin: 0 auto; padding: 24px;
+    }
+    .wordmark { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--text-body); }
+    .wordmark:hover { text-decoration: none; }
+    .topbar a.back { font-weight: 600; font-size: 14px; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 24px 24px 64px; }
+    .eyebrow {
+      text-transform: uppercase; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; color: var(--accent); margin: 0 0 12px;
+    }
+    h1 {
+      font-size: 44px; font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1.1; margin: 0 0 12px;
+    }
+    .meta { color: var(--text-muted); font-size: 14px; margin: 0 0 8px; }
+    .lede { font-size: 18px; margin: 24px 0 8px; }
+
+    h2 {
+      font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+      margin: 48px 0 12px; scroll-margin-top: 24px;
+    }
+    h2 .num { color: var(--accent); font-weight: 800; margin-right: 10px; }
+    h3 { font-size: 18px; font-weight: 700; margin: 24px 0 8px; }
+    p, li { font-size: 16px; }
+    ul, ol { padding-left: 22px; }
+    li { margin: 6px 0; }
+    hr { border: 0; border-top: 1px solid var(--border-hairline); margin: 40px 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border-hairline); vertical-align: top; }
+    th { font-weight: 700; }
+
+    .callout {
+      background: var(--surface-accent); border-radius: var(--radius-md);
+      padding: 16px 20px; margin: 24px 0; font-size: 15px;
+    }
+    .callout.warn { background: #fdeeee; }
+    .card {
+      background: var(--surface-card); border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg); padding: 20px 24px; margin: 24px 0;
+    }
+    .toc { font-size: 15px; }
+    .toc a { display: block; padding: 3px 0; color: var(--text-body); }
+    .toc a:hover { color: var(--accent); text-decoration: none; }
+
+    footer { background: var(--accent); color: #fff; margin-top: 64px; }
+    footer .inner { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+    footer .fm { font-weight: 800; font-size: 20px; }
+    footer a { color: #fff; opacity: 0.92; font-size: 14px; margin-right: 20px; }
+    footer a:hover { opacity: 1; }
+    footer .legal { margin-top: 20px; font-size: 13px; opacity: 0.8; }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 34px; }
+      h2 { font-size: 21px; }
+    }
   </style>
 </head>
 <body>
-  <main class="card">
-    <p class="brand">viaxi</p>
+  <header class="topbar">
+    <a class="wordmark" href="/">viaxi</a>
+    <a class="back" href="/">← Volver al inicio</a>
+  </header>
 
+  <main>
+    <p class="eyebrow">Tu cuenta</p>
     <h1>Eliminar tu cuenta</h1>
-    <p>Puedes eliminar tu cuenta de <strong>viaxi</strong> tú mismo, desde la app, sin pedírselo a nadie.</p>
+    <p class="meta">Última actualización: 7 de agosto de 2026</p>
 
-    <h2>Cómo hacerlo</h2>
-    <ol class="steps">
+    <p class="lede">
+      Puedes eliminar tu cuenta de viaxi tú mismo, desde la app, sin pedírselo a
+      nadie y sin esperar a que alguien te conteste.
+    </p>
+
+    <div class="card toc">
+      <strong>Contenido</strong>
+      <a href="#como">1. Cómo eliminar tu cuenta</a>
+      <a href="#elimina">2. Qué se elimina</a>
+      <a href="#conserva">3. Qué se conserva, y por qué</a>
+      <a href="#desinstalada">4. Si ya desinstalaste la app</a>
+      <a href="#english">5. In English</a>
+    </div>
+
+    <h2 id="como"><span class="num">01</span>Cómo eliminar tu cuenta</h2>
+    <ol>
       <li>Abre la app de viaxi.</li>
       <li>Entra a <strong>Perfil</strong>.</li>
       <li>Toca <strong>Ajustes</strong>.</li>
       <li>Elige <strong>Eliminar cuenta</strong> y confirma.</li>
     </ol>
-    <p>El proceso es inmediato y no se puede deshacer.</p>
 
-    <h2>Qué se elimina</h2>
-    <ul>
-      <li>Tus credenciales de acceso: dejas de poder entrar a la cuenta.</li>
-      <li>Tu perfil deja de ser visible para otras personas.</li>
-      <li>Tu número de teléfono y tu correo se liberan, para que puedas volver a registrarte con ellos si algún día quieres.</li>
-      <li>Tus rutas publicadas se retiran y dejan de aparecer para nadie.</li>
-      <li>Tus solicitudes de viaje pendientes o aceptadas se cancelan.</li>
-      <li>Sales de la red de contactos de las demás personas.</li>
-    </ul>
+    <div class="callout warn">
+      <strong>La eliminación es inmediata y no se puede deshacer.</strong> No hay
+      periodo de gracia ni forma de recuperar la cuenta después de confirmar.
+    </div>
 
-    <h2>Qué se conserva, y por qué</h2>
-    <p>El historial de los viajes que ya ocurrieron y las aportaciones registradas en ellos se conservan, asociados a una cuenta cancelada y sin tu perfil visible.</p>
-    <p>La razón es que un viaje no es sólo tuyo: la otra persona que iba en el coche tiene derecho a su propio registro de lo que pasó y de lo que se aportó. Borrarlo del lado de una borraría también el del otro.</p>
+    <h2 id="elimina"><span class="num">02</span>Qué se elimina</h2>
+    <table>
+      <thead>
+        <tr><th>Dato</th><th>Qué pasa</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Credenciales de acceso</td><td>Se eliminan. Dejas de poder entrar a la cuenta.</td></tr>
+        <tr><td>Tu perfil</td><td>Deja de ser visible para cualquier persona.</td></tr>
+        <tr><td>Teléfono y correo</td><td>Se liberan, para que puedas volver a registrarte con ellos si algún día quieres.</td></tr>
+        <tr><td>Rutas publicadas</td><td>Se retiran y dejan de aparecer en búsquedas.</td></tr>
+        <tr><td>Solicitudes de viaje</td><td>Las pendientes y aceptadas se cancelan.</td></tr>
+        <tr><td>Red de contactos</td><td>Sales de la libreta de las demás personas.</td></tr>
+      </tbody>
+    </table>
 
-    <h2>Si ya desinstalaste la app</h2>
-    <p>Escríbenos a <a href="mailto:privacidad@viaxi.app">privacidad@viaxi.app</a> desde el correo de tu cuenta, o indicando tu número, y la eliminamos por ti.</p>
+    <h2 id="conserva"><span class="num">03</span>Qué se conserva, y por qué</h2>
+    <p>
+      El historial de los viajes que ya ocurrieron y las aportaciones registradas
+      en ellos se conservan, asociados a una cuenta cancelada y sin tu perfil
+      visible.
+    </p>
+    <div class="callout">
+      Un viaje no es sólo tuyo: la otra persona que iba en el coche tiene derecho
+      a su propio registro de lo que pasó y de lo que se aportó. Borrarlo de un
+      lado borraría también el del otro.
+    </div>
+    <p class="meta">
+      El tratamiento de tus datos, los plazos de conservación y tus derechos ARCO
+      están en el <a href="/privacy/integral/">Aviso de Privacidad</a>.
+    </p>
 
-    <p class="note">Más detalle sobre el tratamiento de tus datos y tus derechos ARCO en el <a href="/privacy/integral/">Aviso de Privacidad</a>.</p>
+    <h2 id="desinstalada"><span class="num">04</span>Si ya desinstalaste la app</h2>
+    <p>
+      Escríbenos a <a href="mailto:privacidad@viaxi.app">privacidad@viaxi.app</a>
+      desde el correo de tu cuenta, o indicando tu número de teléfono, y la
+      eliminamos por ti.
+    </p>
 
     <hr />
 
-    <h1 lang="en">Delete your account</h1>
-    <p lang="en">You can delete your <strong>viaxi</strong> account yourself, from within the app.</p>
-
-    <h2 lang="en">How to do it</h2>
-    <ol class="steps" lang="en">
+    <h2 id="english" lang="en"><span class="num">05</span>Delete your account</h2>
+    <p lang="en">
+      You can delete your viaxi account yourself, from within the app.
+    </p>
+    <ol lang="en">
       <li>Open the viaxi app.</li>
       <li>Go to <strong>Profile</strong>.</li>
       <li>Tap <strong>Settings</strong>.</li>
       <li>Choose <strong>Delete account</strong> and confirm.</li>
     </ol>
-    <p lang="en">Deletion is immediate and cannot be undone.</p>
+    <p lang="en">
+      Deletion is immediate and cannot be undone.
+    </p>
+    <p lang="en">
+      <strong>Deleted:</strong> your sign-in credentials, your visible profile,
+      your published routes, your pending and accepted ride requests, and your
+      presence in other people's contact network. Your phone number and email are
+      released so you can register again later.
+    </p>
+    <p lang="en">
+      <strong>Kept:</strong> the record of trips that already happened and the
+      contributions logged on them, tied to a cancelled account with no visible
+      profile. A trip is not only yours — the other person in the car is entitled
+      to their own record, so erasing one side would erase theirs.
+    </p>
+    <p lang="en">
+      Already uninstalled the app? Email
+      <a href="mailto:privacidad@viaxi.app">privacidad@viaxi.app</a> from your
+      account's email address, or quoting your phone number, and we will delete
+      it for you.
+    </p>
 
-    <h2 lang="en">What is deleted</h2>
-    <ul lang="en">
-      <li>Your sign-in credentials: you can no longer access the account.</li>
-      <li>Your profile stops being visible to anyone.</li>
-      <li>Your phone number and email are released, so you can register again with them later if you want to.</li>
-      <li>Your published routes are withdrawn.</li>
-      <li>Your pending and accepted ride requests are cancelled.</li>
-      <li>You are removed from other people's contact network.</li>
-    </ul>
-
-    <h2 lang="en">What is kept, and why</h2>
-    <p lang="en">The record of trips that already happened, and the contributions logged on them, is kept — tied to a cancelled account, with no visible profile.</p>
-    <p lang="en">A trip is not only yours: the other person in the car is entitled to their own record of what happened and what was contributed. Erasing one side would erase theirs too.</p>
-
-    <h2 lang="en">If you already uninstalled the app</h2>
-    <p lang="en">Email <a href="mailto:privacidad@viaxi.app">privacidad@viaxi.app</a> from your account's email address, or quoting your phone number, and we will delete it for you.</p>
-
-    <p class="note" lang="en">Full detail on data handling in our <a href="/privacy/integral/">Privacy Notice</a>.</p>
+    <p class="meta">Contacto: <a href="mailto:privacidad@viaxi.app">privacidad@viaxi.app</a></p>
   </main>
+
+  <footer>
+    <div class="inner">
+      <div class="fm">viaxi</div>
+      <p style="opacity:.9; margin:8px 0 20px;">Comparte el camino.</p>
+      <nav>
+        <a href="/terms">Términos</a>
+        <a href="/privacy/integral">Privacidad</a>
+        <a href="/codigo-de-conducta">Código de conducta</a>
+      </nav>
+      <div class="legal">© 2026 viaxi. Todos los derechos reservados.</div>
+    </div>
+  </footer>
 </body>
 </html>
