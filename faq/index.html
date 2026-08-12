@@ -1,0 +1,362 @@
+<!doctype html>
+<!--
+  Preguntas frecuentes — la versión completa.
+  La portada tiene seis preguntas para quien todavía no entiende qué es viaxi;
+  esta cubre además las que aparecen ya usando la app, para poder enlazarla
+  desde la app, los correos y soporte sin reescribirlas cada vez.
+
+  Mismo shell que /terms, /privacy/integral y /codigo-de-conducta.
+-->
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preguntas frecuentes — viaxi</title>
+  <meta name="description" content="Cómo funciona viaxi: círculos de confianza, aportación voluntaria, verificación de identidad, viajes, calificaciones y tu cuenta." />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent: #2d6be4;
+      --accent-hover: #1f54c0;
+      --surface-accent: #eaf1fd;
+      --bg-page: #ffffff;
+      --surface-card: #f5f5f5;
+      --border-hairline: #dbdbdb;
+      --text-muted: #8c8c8c;
+      --text-body: #000000;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+      color: var(--text-body);
+      background: var(--bg-page);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 860px; margin: 0 auto; padding: 24px;
+    }
+    .wordmark { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--text-body); }
+    .wordmark:hover { text-decoration: none; }
+    .topbar a.back { font-weight: 600; font-size: 14px; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 24px 24px 64px; }
+    .eyebrow {
+      text-transform: uppercase; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; color: var(--accent); margin: 0 0 12px;
+    }
+    h1 {
+      font-size: 44px; font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1.1; margin: 0 0 12px;
+    }
+    .meta { color: var(--text-muted); font-size: 14px; margin: 0 0 8px; }
+    .lede { font-size: 18px; margin: 24px 0 8px; }
+
+    h2 {
+      font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+      margin: 48px 0 12px; scroll-margin-top: 24px;
+    }
+    h2 .num { color: var(--accent); font-weight: 800; margin-right: 10px; }
+    h3 { font-size: 18px; font-weight: 700; margin: 24px 0 8px; }
+    p, li { font-size: 16px; }
+    ul, ol { padding-left: 22px; }
+    li { margin: 6px 0; }
+    hr { border: 0; border-top: 1px solid var(--border-hairline); margin: 40px 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border-hairline); vertical-align: top; }
+    th { font-weight: 700; }
+
+    .callout {
+      background: var(--surface-accent); border-radius: var(--radius-md);
+      padding: 16px 20px; margin: 24px 0; font-size: 15px;
+    }
+    .callout.warn { background: #fdeeee; }
+    .card {
+      background: var(--surface-card); border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg); padding: 20px 24px; margin: 24px 0;
+    }
+    .toc { font-size: 15px; }
+    .toc a { display: block; padding: 3px 0; color: var(--text-body); }
+    .toc a:hover { color: var(--accent); text-decoration: none; }
+
+    footer { background: var(--accent); color: #fff; margin-top: 64px; }
+    footer .inner { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+    footer .fm { font-weight: 800; font-size: 20px; }
+    footer a { color: #fff; opacity: 0.92; font-size: 14px; margin-right: 20px; }
+    footer a:hover { opacity: 1; }
+    footer .legal { margin-top: 20px; font-size: 13px; opacity: 0.8; }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 34px; }
+      h2 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="/">viaxi</a>
+    <a class="back" href="/">← Volver al inicio</a>
+  </header>
+
+  <main>
+    <p class="eyebrow">Ayuda</p>
+    <h1>Preguntas frecuentes</h1>
+    <p class="meta">Última actualización: 12 de agosto de 2026</p>
+
+    <p class="lede">
+      viaxi organiza el aventón entre personas que ya se conocen y ya hacen el
+      mismo camino. Aquí está cómo funciona, de principio a fin.
+    </p>
+
+    <div class="card toc">
+      <strong>Contenido</strong>
+      <a href="#que-es">1. Qué es viaxi</a>
+      <a href="#circulos">2. Con quién viajas</a>
+      <a href="#aportacion">3. La aportación voluntaria</a>
+      <a href="#identidad">4. Verificación de identidad</a>
+      <a href="#viajes">5. Publicar y unirse a un viaje</a>
+      <a href="#durante">6. Durante el viaje</a>
+      <a href="#despues">7. Después del viaje</a>
+      <a href="#cuenta">8. Tu cuenta y tus datos</a>
+    </div>
+
+    <h2 id="que-es"><span class="num">01</span>Qué es viaxi</h2>
+
+    <h3>¿viaxi es como Uber o DiDi?</h3>
+    <p>
+      No. viaxi no es un servicio de transporte: es una herramienta para
+      organizar aventones entre conocidos que ya comparten el mismo camino al
+      trabajo. No hay conductores profesionales, no hay tarifas, y viaxi no
+      procesa ningún pago.
+    </p>
+
+    <h3>¿Cuánto cuesta usar viaxi?</h3>
+    <p>
+      La app es gratuita. No hay comisiones ni suscripción. Lo único que existe
+      es la aportación voluntaria del Compañero a los gastos de viaje del
+      Piloto, en efectivo y directa entre ustedes.
+    </p>
+
+    <h3>¿Quién puede usarla?</h3>
+    <p>
+      Mayores de 18 años. Al registrarte verificamos tu identidad con una
+      identificación oficial, así que la edad queda comprobada ahí mismo.
+    </p>
+
+    <h3>¿Cuándo puedo empezar?</h3>
+    <p>
+      Lanzamos en la Ciudad de México en septiembre de 2026.
+      <a href="https://pre-registro.viaxi.app">Pre-regístrate</a> y te avisamos
+      en cuanto tu zona esté activa. Entre más gente de tu círculo se registre,
+      más caminos compartidos vas a tener desde el primer día.
+    </p>
+
+    <h2 id="circulos"><span class="num">02</span>Con quién viajas</h2>
+
+    <h3>¿Voy a viajar con desconocidos?</h3>
+    <p>
+      No. Solo ves —y te ven— personas dentro de tus círculos de confianza: tus
+      contactos directos, o personas con las que tienes amigos en común. Si no
+      comparten a nadie, esa persona simplemente no aparece en tu viaxi.
+    </p>
+
+    <h3>¿Cómo se arma mi círculo?</h3>
+    <p>
+      Al registrarte conectas tu agenda e invitas a tu gente: compañeros de
+      trabajo, amigos, vecinos. Cada persona que se suma abre los caminos de
+      quienes ya estaban. Los círculos se miden por qué tan cerca están de ti:
+      un contacto directo es lo más cercano, y de ahí hacia afuera por amigos en
+      común.
+    </p>
+
+    <h3>¿viaxi sube mi agenda?</h3>
+    <p>
+      Usamos los contactos que autorices únicamente para encontrar conexiones en
+      común y construir tu círculo. No se publican, no se comparten con otras
+      personas y no se usan para invitar a nadie sin que tú lo pidas. El detalle
+      está en el <a href="/privacy/integral/">Aviso de Privacidad</a>.
+    </p>
+
+    <h2 id="aportacion"><span class="num">03</span>La aportación voluntaria</h2>
+
+    <h3>¿Cuánto se aporta?</h3>
+    <p>
+      La app sugiere una cantidad según los kilómetros que viajaste —alrededor
+      de $2 MXN por kilómetro— para ayudar a cubrir la gasolina de un trayecto
+      que el Piloto ya iba a hacer. Es una sugerencia, no un cobro: ustedes
+      acuerdan.
+    </p>
+
+    <h3>¿viaxi cobra o procesa el dinero?</h3>
+    <p>
+      No. La aportación es en efectivo y directa entre las dos personas. viaxi
+      no la cobra, no la retiene y no se queda con parte de ella. En la app cada
+      quien confirma que ya ocurrió: el Compañero marca que aportó y el Piloto
+      que recibió.
+    </p>
+
+    <h3>¿El Piloto gana dinero?</h3>
+    <p>
+      No. Recibe aportaciones que ayudan a cubrir el costo de un camino que ya
+      iba a recorrer. No es un ingreso ni un empleo: es compartir el gasto entre
+      conocidos.
+    </p>
+
+    <div class="callout">
+      Si alguien te pide una cantidad fija, te condiciona el viaje a pagar de
+      más, o te propone algo que se parece a una tarifa, eso va en contra del
+      <a href="/codigo-de-conducta/">Código de Conducta</a> y puedes reportarlo.
+    </div>
+
+    <h2 id="identidad"><span class="num">04</span>Verificación de identidad</h2>
+
+    <h3>¿Por qué me piden identificación y selfie?</h3>
+    <p>
+      Porque el trato de viaxi es que nadie sea un desconocido. Comparamos tu
+      identificación oficial con una selfie para confirmar que eres quien dices
+      ser, y solo entonces tu cuenta queda activa.
+    </p>
+
+    <h3>¿Cuánto tarda?</h3>
+    <p>
+      Normalmente es cuestión de minutos. Cuando las imágenes no se leen bien o
+      algo no coincide, una persona lo revisa a mano y te avisamos en cuanto
+      haya respuesta.
+    </p>
+
+    <h3>No pasó mi verificación, ¿ahora qué?</h3>
+    <p>
+      La app te dice qué salió mal y a dónde ir. Si tu nombre no coincide con tu
+      identificación, te lleva a corregirlo y luego a intentar de nuevo. Si el
+      problema fue la foto o la selfie, te deja repetir la captura. Vale la pena
+      buena luz, sin lentes y con la identificación completa dentro del recuadro.
+    </p>
+
+    <h2 id="viajes"><span class="num">05</span>Publicar y unirse a un viaje</h2>
+
+    <h3>Soy Piloto: ¿cómo publico mi camino?</h3>
+    <p>
+      Registras tu ruta habitual —de dónde sales, a dónde llegas, a qué hora y
+      qué días— y cuántos lugares ofreces. Se publica una vez y sirve para todos
+      los días que elegiste; no tienes que volver a capturarla cada mañana.
+    </p>
+
+    <h3>Soy Compañero: ¿cómo consigo aventón?</h3>
+    <p>
+      Buscas por tu origen y destino y te aparecen las rutas de tu círculo que
+      pasan por tu camino. Envías tu solicitud indicando dónde te subes, y el
+      Piloto la acepta o la rechaza. Nadie sube a un coche sin que el Piloto lo
+      haya aceptado.
+    </p>
+
+    <h3>No aparece ninguna ruta para mí</h3>
+    <p>
+      Casi siempre es que tu círculo todavía es chico: solo ves a quienes están
+      conectados contigo. Invita a compañeros de trabajo y vecinos, que es donde
+      más se repiten los mismos caminos. También puedes guardar tu búsqueda y te
+      avisamos cuando alguien de tu círculo publique una ruta que te sirva.
+    </p>
+
+    <h3>¿Puedo cancelar?</h3>
+    <p>
+      Sí, y entre antes mejor: del otro lado hay alguien organizando su día
+      alrededor de ese viaje. Cancelar a última hora o no presentarse afecta tu
+      reputación en la comunidad — está en el
+      <a href="/codigo-de-conducta/">Código de Conducta</a>.
+    </p>
+
+    <h2 id="durante"><span class="num">06</span>Durante el viaje</h2>
+
+    <h3>¿Cómo nos ponemos de acuerdo?</h3>
+    <p>
+      Cada ruta tiene su chat, disponible desde que el Piloto acepta a un
+      Compañero. Ahí acuerdan el punto exacto de encuentro sin tener que
+      intercambiar teléfonos.
+    </p>
+
+    <h3>¿Puedo ver dónde viene el Piloto?</h3>
+    <p>
+      Sí. Cuando el viaje arranca, la app muestra el recorrido en vivo y el
+      tiempo estimado de llegada a tu punto.
+    </p>
+
+    <h3>¿Y si algo sale mal en el camino?</h3>
+    <p>
+      Repórtalo. Cualquier situación que te haya hecho sentir inseguro se puede
+      reportar desde la app, y las conductas graves son motivo de salida
+      inmediata de viaxi. Si hay una emergencia, primero llama al 911.
+    </p>
+
+    <h2 id="despues"><span class="num">07</span>Después del viaje</h2>
+
+    <h3>¿Para qué sirven las calificaciones?</h3>
+    <p>
+      Al terminar, cada quien califica a la otra persona. Es lo que sostiene la
+      confianza de la comunidad cuando el círculo empieza a crecer: la
+      reputación viaja contigo.
+    </p>
+
+    <h3>¿La otra persona ve lo que puse?</h3>
+    <p>
+      Ve su calificación y sus comentarios, no quién dijo qué en cada viaje.
+    </p>
+
+    <h2 id="cuenta"><span class="num">08</span>Tu cuenta y tus datos</h2>
+
+    <h3>¿Cómo cambio o silencio las notificaciones?</h3>
+    <p>
+      Las de la app se ajustan en <strong>Perfil → Ajustes</strong>. Las de
+      correo también se pueden ajustar desde
+      <a href="/preferencias/">viaxi.app/preferencias</a>, con el enlace que
+      viene al final de cada correo que te mandamos.
+    </p>
+
+    <h3>¿Cómo elimino mi cuenta?</h3>
+    <p>
+      Desde <strong>Perfil → Ajustes → Eliminar cuenta</strong>. Qué se borra,
+      qué se conserva y por qué está explicado en
+      <a href="/eliminar-cuenta/">viaxi.app/eliminar-cuenta</a>.
+    </p>
+
+    <h3>¿Qué hacen con mis datos?</h3>
+    <p>
+      Lo que recabamos, para qué y tus derechos ARCO están en el
+      <a href="/privacy/integral/">Aviso de Privacidad</a>. Las reglas de uso de
+      la plataforma están en los <a href="/terms/">Términos</a>.
+    </p>
+
+    <hr />
+
+    <p class="meta">
+      ¿No encontraste tu respuesta? Escríbenos a
+      <a href="mailto:soporte@viaxi.app">soporte@viaxi.app</a>.
+    </p>
+  </main>
+
+  <footer>
+    <div class="inner">
+      <div class="fm">viaxi</div>
+      <p style="opacity:.9; margin:8px 0 20px;">Comparte el camino.</p>
+      <nav>
+        <a href="/terms">Términos</a>
+        <a href="/privacy/integral">Privacidad</a>
+        <a href="/codigo-de-conducta">Código de conducta</a>
+        <a href="/faq">Preguntas</a>
+      </nav>
+      <div class="legal">© 2026 viaxi. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+</body>
+</html>
