@@ -95,6 +95,10 @@
   @media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
   .hero .lead{margin:20px 0 32px}
   .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .store-badges a{display:inline-block;transition:transform .12s var(--ease)}
+  .store-badges a:hover{transform:translateY(-2px)}
+  .store-badges img{height:56px;width:auto;max-width:100%;display:block}
+  @media(max-width:420px){.store-badges img{height:52px}}
   .hero-note{margin-top:16px;font-size:var(--text-sm);color:var(--text-muted)}
   .hero .foto{aspect-ratio:4/5;max-height:520px;width:100%}
 
@@ -258,9 +262,13 @@
       <p class="eyebrow">¿Sigues yendo solo al trabajo?</p>
       <h1>El aventón de alguien<br>que <span class="em">ya conoces</span>.</h1>
       <p class="lead">Comparte tu camino al trabajo con gente de tu red. Sin desconocidos, sin tarifas: solo una aportación voluntaria a la gasolina, entre conocidos.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="/descargar" data-cta="hero">Descargar la app</a>
-        <a class="btn btn-secondary" href="#como-funciona" data-cta="hero_como_funciona">Cómo funciona</a>
+      <div class="hero-ctas store-badges">
+        <a href="/ios" data-cta="hero_ios" onclick="gtag('event','download_click',{platform:'ios'})" aria-label="Descargar en el App Store">
+          <img src="/descargar/appstore.png" alt="Descargar en el App Store" width="189" height="56">
+        </a>
+        <a href="/android" data-cta="hero_android" onclick="gtag('event','download_click',{platform:'android'})" aria-label="Disponible en Google Play">
+          <img src="/descargar/googleplay.png" alt="Disponible en Google Play" width="188" height="56">
+        </a>
       </div>
       <p class="hero-note">Ya disponible en la CDMX. Descárgala y entra con tu círculo.</p>
     </div>
