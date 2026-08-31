@@ -36,7 +36,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg-page);color:var(--text-body);font-size:var(--text-base);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg-page);color:var(--text-body);font-size:var(--text-base);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh}
   .container{max-width:1120px;margin:0 auto;padding:0 24px}
 
   h1{line-height:1.05;letter-spacing:-0.02em;font-size:clamp(34px,7vw,64px);font-weight:800;overflow-wrap:break-word}
@@ -85,7 +85,7 @@
   .triada-item svg{color:var(--accent);flex-shrink:0}
 
   /* footer */
-  footer{border-top:1px solid var(--border-hairline);padding:40px 0;font-size:var(--text-sm);color:var(--text-muted);margin-top:8px}
+  footer{padding:40px 0;font-size:var(--text-sm);color:var(--text-muted);margin-top:auto}
   .foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   footer a{color:var(--text-muted);text-decoration:none;margin-right:20px}
   footer a:hover{color:var(--accent)}
