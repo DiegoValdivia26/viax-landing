@@ -1,66 +1,177 @@
-<!doctype html>
-<!--
-  Smart download link: viaxi.app/descargar
-  Detects the visitor's platform and forwards to the right store. iOS and
-  Android bounce straight through /ios and /android — which hold the single
-  STORE_URL each, so publishing the app is still a one-line edit in those two
-  files and never here. Desktop / anything else shows both buttons instead of
-  guessing. Safe to share in stories, posts and emails.
--->
+<!DOCTYPE html>
 <html lang="es-MX">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Descargar viaxi</title>
-  <meta name="description" content="Descarga la app de viaxi para iPhone o Android." />
-  <link rel="icon" href="/favicon.ico" />
-  <style>
-    :root{--blue:#2d6be4;--blue-hover:#1f54c0;--ink:#111;--body:#333;--mut:#8c8c8c;--line:#dbdbdb;--card:#fdfdfd;--bg:#f5f5f5}
-    @media (prefers-color-scheme:dark){
-      :root{--ink:#f2f2f2;--body:#c6cbd2;--mut:#9aa0a8;--line:#3a3d44;--card:#212329;--bg:#17181c;--blue:#7aa5f2;--blue-hover:#9bb9f5}
-    }
-    *{box-sizing:border-box}
-    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;
-      background:var(--bg);color:var(--body);
-      font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-    .card{width:100%;max-width:460px;background:var(--card);border:1px solid var(--line);
-      border-radius:12px;padding:32px;text-align:center}
-    .brand{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--blue);margin:0 0 20px}
-    h1{margin:0 0 12px;font-size:22px;line-height:1.3;color:var(--ink);font-weight:800;letter-spacing:-.02em}
-    p{margin:0 0 20px;font-size:15px;line-height:1.6}
-    .btns{display:flex;flex-direction:column;gap:12px}
-    .btn{display:block;padding:14px 20px;border-radius:10px;font-weight:700;font-size:15px;
-      text-decoration:none;border:1px solid var(--line);color:var(--ink);background:transparent}
-    .btn-primary{background:var(--blue);border-color:var(--blue);color:#fff}
-    .btn-primary:hover{background:var(--blue-hover);border-color:var(--blue-hover)}
-    a.plain{color:var(--blue)}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="https://mcmqjcjejmfagankyaso.supabase.co/storage/v1/object/public/landing/v2/b2ed7f5f5b.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://mcmqjcjejmfagankyaso.supabase.co/storage/v1/object/public/landing/v2/00a068d64c.png">
+<meta name="theme-color" content="#2d6be4">
+<meta name="description" content="Descarga viaxi para iPhone o Android. El aventón de alguien que ya conoces. Sin desconocidos, sin tarifas. Ya disponible en la CDMX.">
+<meta property="og:title" content="Descarga viaxi">
+<meta property="og:description" content="El aventón de alguien que ya conoces. Bájala gratis para iPhone o Android.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<title>Descarga viaxi — iPhone y Android</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-98B50V2BRK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-98B50V2BRK');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#2d6be4; --accent-hover:#1f54c0; --surface-accent:#eaf1fd;
+    --teal:#2ec4a5;
+    --bg-page:#ffffff; --surface-card:#f5f5f5; --border-hairline:#dbdbdb;
+    --text-muted:#8c8c8c; --text-body:#000000;
+    --radius-md:8px; --radius-lg:16px; --radius-pill:999px;
+    --ease:cubic-bezier(.2,.6,.2,1);
+    --text-xs:12px; --text-sm:14px; --text-base:16px; --text-md:18px;
+    --text-lg:24px; --text-xl:32px; --text-2xl:44px; --text-4xl:60px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg-page);color:var(--text-body);font-size:var(--text-base);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  h1{line-height:1.05;letter-spacing:-0.02em;font-size:clamp(34px,7vw,64px);font-weight:800;overflow-wrap:break-word}
+  .em{font-style:italic;color:var(--accent)}
+  .eyebrow{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:14px}
+  .lead{font-size:var(--text-md);color:var(--text-muted);max-width:520px}
+
+  a:not(.btn){color:var(--accent)}
+  a:not(.btn):hover{color:var(--accent-hover)}
+
+  /* nav */
+  nav{position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid var(--border-hairline);z-index:50}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .wordmark{font-weight:800;font-size:22px;letter-spacing:-0.02em;color:var(--text-body);text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+  .logo-mark{height:36px;width:auto;border-radius:8px}
+  footer .logo-mark{height:28px}
+  .wordmark .dot{color:var(--teal)}
+  .nav-back{color:var(--text-body);text-decoration:none;font-size:var(--text-sm);font-weight:600}
+  .nav-back:hover{color:var(--accent)}
+
+  /* hero */
+  .hero{padding:72px 0 56px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero-grid>*{min-width:0}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:32px}}
+  .hero .lead{margin:20px 0 32px}
+  .hero-note{margin-top:18px;font-size:var(--text-sm);color:var(--text-muted)}
+
+  .foto{background:var(--surface-card);border-radius:var(--radius-lg);overflow:hidden;position:relative;aspect-ratio:4/5;max-height:520px;width:100%}
+  .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  @media(max-width:720px){.foto{margin:0 -24px;width:calc(100% + 48px);border-radius:0;aspect-ratio:3/2;max-height:340px}}
+
+  /* store badges */
+  .store-badges{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .store-badges a{display:inline-block;transition:transform .12s var(--ease),opacity .2s var(--ease)}
+  .store-badges a:hover{transform:translateY(-2px)}
+  .store-badges a:active{transform:scale(.98)}
+  .store-badges img{height:56px;width:auto;max-width:100%;display:block}
+  .store-badges a:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:10px}
+  @media(max-width:420px){.store-badges img{height:52px}}
+
+  /* trust strip */
+  .triada{border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);padding:26px 0}
+  .triada-grid{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+  .triada-item{display:flex;align-items:center;gap:10px;font-weight:700;font-size:var(--text-md)}
+  .triada-item svg{color:var(--accent);flex-shrink:0}
+
+  /* footer */
+  footer{border-top:1px solid var(--border-hairline);padding:40px 0;font-size:var(--text-sm);color:var(--text-muted);margin-top:8px}
+  .foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  footer a{color:var(--text-muted);text-decoration:none;margin-right:20px}
+  footer a:hover{color:var(--accent)}
+  .social-row{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+  .social-row a{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--border-hairline);border-radius:var(--radius-pill);color:var(--text-body);text-decoration:none;font-size:var(--text-sm);font-weight:600;margin-right:0}
+  .social-row a:hover{border-color:var(--accent);color:var(--accent)}
+</style>
 </head>
 <body>
-  <main class="card">
-    <p class="brand">viaxi</p>
-    <h1 id="title">Descarga viaxi</h1>
-    <p id="msg">Elige tu dispositivo para ir a la tienda.</p>
-    <div class="btns">
-      <a class="btn btn-primary" href="/ios">Descargar para iPhone</a>
-      <a class="btn" href="/android">Descargar para Android</a>
+
+<nav>
+  <div class="container nav-inner">
+    <a class="wordmark" href="/"><img class="logo-mark" src="https://mcmqjcjejmfagankyaso.supabase.co/storage/v1/object/public/landing/v2/9c99569a6f.png" alt="Viaxi">viaxi<span class="dot">.</span></a>
+    <a class="nav-back" href="/">← Volver al inicio</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Ya disponible en la CDMX</p>
+      <h1>Descarga viaxi y comparte el <span class="em">camino</span>.</h1>
+      <p class="lead">El aventón de alguien que ya conoces. Sin desconocidos, sin tarifas: solo una aportación voluntaria a la gasolina. Bájala gratis y entra con tu círculo.</p>
+      <div class="store-badges">
+        <a href="/ios" data-cta="descargar_ios" onclick="gtag('event','download_click',{platform:'ios'})" aria-label="Descargar en el App Store">
+          <img src="appstore.png" alt="Descargar en el App Store" width="189" height="56">
+        </a>
+        <a href="/android" data-cta="descargar_android" onclick="gtag('event','download_click',{platform:'android'})" aria-label="Disponible en Google Play">
+          <img src="googleplay.png" alt="Disponible en Google Play" width="188" height="56">
+        </a>
+      </div>
+      <p class="hero-note">Gratis · Para iPhone y Android · <span id="deviceHint">Abre este enlace en tu teléfono para bajarla al instante.</span></p>
     </div>
-  </main>
-  <script>
-    // Forward mobile visitors straight to their store bridge; desktop keeps the
-    // two buttons above. iPadOS reports as Mac, so also treat touch-capable
-    // "Mac" as iOS.
-    var ua = navigator.userAgent || '';
-    var isAndroid = /android/i.test(ua);
-    var isIOS = /iphone|ipad|ipod/i.test(ua) ||
-      (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-    if (isAndroid) {
-      location.replace('/android');
-    } else if (isIOS) {
-      location.replace('/ios');
-    } else {
-      document.getElementById('msg').textContent = 'Abre este enlace en tu teléfono, o elige tu dispositivo:';
-    }
-  </script>
+    <div class="foto">
+      <img src="https://mcmqjcjejmfagankyaso.supabase.co/storage/v1/object/public/landing/v2/5af2a73f13.jpeg" alt="Tres amigos compartiendo el camino con café, luz de mañana">
+    </div>
+  </div>
+</header>
+
+<section class="triada">
+  <div class="container triada-grid">
+    <div class="triada-item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Sin desconocidos</div>
+    <div class="triada-item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Sin tarifas</div>
+    <div class="triada-item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Entre conocidos</div>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot-grid">
+    <div>
+      <span class="wordmark" style="font-size:18px"><img class="logo-mark" src="https://mcmqjcjejmfagankyaso.supabase.co/storage/v1/object/public/landing/v2/9c99569a6f.png" alt="Viaxi">viaxi<span class="dot">.</span></span>
+      <p style="margin-top:8px">Comparte el camino. · CDMX, México</p>
+    </div>
+    <div>
+      <div>
+        <a href="/terms">Términos</a>
+        <a href="/privacy/integral">Privacidad</a>
+        <a href="/codigo-de-conducta">Código de conducta</a>
+        <a href="/faq">Preguntas</a>
+      </div>
+      <div class="social-row">
+        <a href="https://instagram.com/viaxi.app" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg> @viaxi.app</a>
+        <a href="https://facebook.com/viaxiapp" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a>
+        <a href="https://www.linkedin.com/company/viaxiapp/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top:24px;font-size:var(--text-xs)">
+    Viaxi es una plataforma para organizar viajes compartidos entre conocidos. No es un servicio de transporte: no procesa pagos, no cobra tarifas y no intermedia contraprestación alguna. Las aportaciones son voluntarias y directas entre usuarios.
+  </div>
+</footer>
+
+<script>
+  // On a phone, take the visitor straight to their store (Diego's ask: detect
+  // and open the store directly). /ios and /android hold the single STORE_URL
+  // each and redirect. On desktop we stay and show the full page with both
+  // badges. iPadOS reports as Mac, so treat touch-capable "Mac" as iOS.
+  var ua = navigator.userAgent || '';
+  var isAndroid = /android/i.test(ua);
+  var isIOS = /iphone|ipad|ipod/i.test(ua) ||
+    (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  if (isAndroid) {
+    location.replace('/android');
+  } else if (isIOS) {
+    location.replace('/ios');
+  }
+</script>
 </body>
 </html>
