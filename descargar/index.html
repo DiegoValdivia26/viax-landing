@@ -1,0 +1,66 @@
+<!doctype html>
+<!--
+  Smart download link: viaxi.app/descargar
+  Detects the visitor's platform and forwards to the right store. iOS and
+  Android bounce straight through /ios and /android — which hold the single
+  STORE_URL each, so publishing the app is still a one-line edit in those two
+  files and never here. Desktop / anything else shows both buttons instead of
+  guessing. Safe to share in stories, posts and emails.
+-->
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Descargar viaxi</title>
+  <meta name="description" content="Descarga la app de viaxi para iPhone o Android." />
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root{--blue:#2d6be4;--blue-hover:#1f54c0;--ink:#111;--body:#333;--mut:#8c8c8c;--line:#dbdbdb;--card:#fdfdfd;--bg:#f5f5f5}
+    @media (prefers-color-scheme:dark){
+      :root{--ink:#f2f2f2;--body:#c6cbd2;--mut:#9aa0a8;--line:#3a3d44;--card:#212329;--bg:#17181c;--blue:#7aa5f2;--blue-hover:#9bb9f5}
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;
+      background:var(--bg);color:var(--body);
+      font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+    .card{width:100%;max-width:460px;background:var(--card);border:1px solid var(--line);
+      border-radius:12px;padding:32px;text-align:center}
+    .brand{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--blue);margin:0 0 20px}
+    h1{margin:0 0 12px;font-size:22px;line-height:1.3;color:var(--ink);font-weight:800;letter-spacing:-.02em}
+    p{margin:0 0 20px;font-size:15px;line-height:1.6}
+    .btns{display:flex;flex-direction:column;gap:12px}
+    .btn{display:block;padding:14px 20px;border-radius:10px;font-weight:700;font-size:15px;
+      text-decoration:none;border:1px solid var(--line);color:var(--ink);background:transparent}
+    .btn-primary{background:var(--blue);border-color:var(--blue);color:#fff}
+    .btn-primary:hover{background:var(--blue-hover);border-color:var(--blue-hover)}
+    a.plain{color:var(--blue)}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <p class="brand">viaxi</p>
+    <h1 id="title">Descarga viaxi</h1>
+    <p id="msg">Elige tu dispositivo para ir a la tienda.</p>
+    <div class="btns">
+      <a class="btn btn-primary" href="/ios">Descargar para iPhone</a>
+      <a class="btn" href="/android">Descargar para Android</a>
+    </div>
+  </main>
+  <script>
+    // Forward mobile visitors straight to their store bridge; desktop keeps the
+    // two buttons above. iPadOS reports as Mac, so also treat touch-capable
+    // "Mac" as iOS.
+    var ua = navigator.userAgent || '';
+    var isAndroid = /android/i.test(ua);
+    var isIOS = /iphone|ipad|ipod/i.test(ua) ||
+      (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    if (isAndroid) {
+      location.replace('/android');
+    } else if (isIOS) {
+      location.replace('/ios');
+    } else {
+      document.getElementById('msg').textContent = 'Abre este enlace en tu teléfono, o elige tu dispositivo:';
+    }
+  </script>
+</body>
+</html>
