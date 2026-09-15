@@ -78,6 +78,14 @@
   .store-badges a:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:10px}
   @media(max-width:420px){.store-badges img{height:52px}}
 
+  /* W5 "ya tienes la app" + W2 desktop QR */
+  .open-app{display:inline-block;margin-top:16px;font-weight:700;font-size:var(--text-sm);color:var(--accent);text-decoration:none}
+  .open-app:hover{color:var(--accent-hover);text-decoration:underline}
+  .qr-block{margin-top:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .qr-block #qr{background:#fff;padding:10px;border:1px solid var(--border-hairline);border-radius:var(--radius-md);line-height:0}
+  .qr-block #qr img,.qr-block #qr canvas{display:block}
+  .qr-block p{font-size:var(--text-sm);color:var(--text-muted);max-width:180px}
+
   /* trust strip */
   .triada{border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);padding:26px 0}
   .triada-grid{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
@@ -110,12 +118,21 @@
       <h1>Descarga viaxi y comparte el <span class="em">camino</span>.</h1>
       <p class="lead">El aventón de alguien que ya conoces. Sin desconocidos, sin tarifas: solo una aportación voluntaria a la gasolina. Bájala gratis y entra con tu círculo.</p>
       <div class="store-badges">
-        <a href="/ios" data-cta="descargar_ios" onclick="gtag('event','download_click',{platform:'ios'})" aria-label="Descargar en el App Store">
+        <a id="badgeIos" href="/ios" data-cta="descargar_ios" aria-label="Descargar en el App Store">
           <img src="appstore.png" alt="Descargar en el App Store" width="189" height="56">
         </a>
-        <a href="/android" data-cta="descargar_android" onclick="gtag('event','download_click',{platform:'android'})" aria-label="Disponible en Google Play">
+        <a id="badgeAndroid" href="/android" data-cta="descargar_android" aria-label="Disponible en Google Play">
           <img src="googleplay.png" alt="Disponible en Google Play" width="188" height="56">
         </a>
+      </div>
+      <!-- W5: el navegador in-app de Meta no dispara Universal Links en un redirect;
+           este botón es la única vía fiable de abrir la app de un usuario ya
+           instalado con sus UTMs. Ceiling: hoy degrada a recargar la landing hasta
+           que la app maneje el deep link (Flutter F1) — no hay esquema propio aún. -->
+      <a id="openAppBtn" class="open-app" href="#" hidden>¿Ya tienes la app? Ábrela →</a>
+      <div id="qrBlock" class="qr-block" hidden>
+        <div id="qr" aria-hidden="true"></div>
+        <p>Escanéalo con tu teléfono para bajarla ahí.</p>
       </div>
       <p class="hero-note">Gratis · Para iPhone y Android · <span id="deviceHint">Abre este enlace en tu teléfono para bajarla al instante.</span></p>
     </div>
@@ -158,20 +175,53 @@
   </div>
 </footer>
 
+<script src="/attribution.js"></script>
 <script>
-  // On a phone, take the visitor straight to their store (Diego's ask: detect
-  // and open the store directly). /ios and /android hold the single STORE_URL
-  // each and redirect. On desktop we stay and show the full page with both
-  // badges. iPadOS reports as Mac, so treat touch-capable "Mac" as iOS.
-  var ua = navigator.userAgent || '';
-  var isAndroid = /android/i.test(ua);
-  var isIOS = /iphone|ipad|ipod/i.test(ua) ||
-    (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-  if (isAndroid) {
-    location.replace('/android');
-  } else if (isIOS) {
-    location.replace('/ios');
-  }
+  // Campaign funnel (docs W1/W2/W5). Read the UTMs, then branch by platform.
+  (function () {
+    var params = ViaxiAttr.params();
+    var plat = ViaxiAttr.platform();
+    var q = location.search; // carry the campaign onward without re-parsing
+
+    if (plat === 'android' || plat === 'ios') {
+      // Phone: log the click + build the store URL (referrer / pt+ct) once, then
+      // auto-forward after a beat so the "¿Ya tienes la app?" button (W5) is
+      // reachable — Meta's in-app browser won't fire the Universal Link on an
+      // instant redirect. Any tap cancels the timer (Meta opens the store as a
+      // modal without hiding the page, so click-cancel is needed, not just
+      // visibilitychange, or the store would launch twice).
+      var url = ViaxiAttr.prepare(plat, params);
+      var openApp = document.getElementById('openAppBtn');
+      openApp.href = 'https://viaxi.app/descargar' + q; // Universal Link, UTMs intact
+      openApp.hidden = false;
+      var badgeIos = document.getElementById('badgeIos');
+      var badgeAndroid = document.getElementById('badgeAndroid');
+      // Badges become the manual store CTA on the interstitial.
+      badgeIos.href = '/ios' + q;
+      badgeAndroid.href = '/android' + q;
+
+      var t = setTimeout(function () { location.replace(url); }, 1500);
+      var cancel = function () { clearTimeout(t); };
+      [openApp, badgeIos, badgeAndroid].forEach(function (el) { el.addEventListener('click', cancel); });
+      document.addEventListener('visibilitychange', function () { if (document.hidden) cancel(); });
+    } else {
+      // Desktop: no click logged ('web' rows don't help the matcher). Wire the
+      // badges to carry the campaign to /ios · /android, and render a QR that
+      // encodes /descargar?<utms> so a phone scan re-runs the whole flow.
+      document.getElementById('badgeIos').href = '/ios' + q;
+      document.getElementById('badgeAndroid').href = '/android' + q;
+      var qrBlock = document.getElementById('qrBlock');
+      qrBlock.hidden = false;
+      var s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      s.onload = function () {
+        new QRCode(document.getElementById('qr'), {
+          text: 'https://viaxi.app/descargar' + q, width: 132, height: 132
+        });
+      };
+      document.head.appendChild(s);
+    }
+  })();
 </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
   Short link to the Android app. Same shape as /ios — see the note there.
-  STORE_URL is the one line to edit when the app is published.
+  Forwards to Play carrying the campaign in &referrer= via /attribution.js.
 -->
 <html lang="es-MX">
 <head>
@@ -30,18 +30,13 @@
     <h1 id="title">Te estamos llevando a Google Play…</h1>
     <p id="msg">Si no pasa nada, <a id="link" href="#">toca aquí</a>.</p>
   </main>
+  <!-- Store URL + referrer encoding now live in /attribution.js (shared with
+       /descargar and /ios). This page just logs the click and forwards. -->
+  <script src="/attribution.js"></script>
   <script>
-    const STORE_URL = 'https://play.google.com/store/apps/details?id=com.viaxi.app';
-
-    if (STORE_URL) {
-      document.getElementById('link').href = STORE_URL;
-      location.replace(STORE_URL);
-    } else {
-      document.getElementById('title').textContent = 'La app está por publicarse';
-      document.getElementById('msg').innerHTML =
-        'Estamos terminando la revisión en Google Play. Te avisamos por correo en cuanto puedas descargarla. ' +
-        '<br><br><a href="https://pre-registro.viaxi.app">Apartar mi lugar</a>';
-    }
+    var url = ViaxiAttr.prepare('android', ViaxiAttr.params());
+    document.getElementById('link').href = url;
+    location.replace(url);
   </script>
 </body>
 </html>
