@@ -1,0 +1,21 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.viaxi.app",
+      "sha256_cert_fingerprints": ["2C:E2:1C:82:5B:03:EB:98:CD:F5:1D:1F:59:F7:DD:F0:E1:EB:79:7D:15:73:96:7E:77:23:F4:A3:ED:84:BF:96"]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.viaxi.app.dev",
+      "sha256_cert_fingerprints": [
+        "C8:41:4C:94:B2:79:A2:A4:0F:CB:67:6A:14:F7:34:B4:C0:73:56:B8:F6:9F:A1:6D:B3:D0:96:D5:24:F8:B2:FC",
+        "36:0F:87:42:3F:4B:EB:99:50:E4:31:78:CD:95:B8:87:A5:E4:A1:6B:59:D1:8A:AF:BB:2E:1B:31:46:0E:CE:D7"
+      ]
+    }
+  }
+]

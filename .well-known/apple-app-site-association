@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["77P6C9255A.com.viaxi.app", "77P6C9255A.com.viaxi.app.dev"],
+        "components": [{ "/": "/descargar*", "comment": "Campaign landing" }]
+      }
+    ]
+  }
+}
