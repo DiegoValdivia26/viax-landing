@@ -22,12 +22,11 @@
   var PLAY_ID = 'com.viaxi.app';
   var PLAY_STORE = 'https://play.google.com/store/apps/details?id=' + PLAY_ID;
 
-  // iOS App Store campaign token (docs P14 / W7). `pt` is the provider token from
-  // App Store Connect → App Analytics → Campaigns → "Generate Campaign Link" —
-  // one value for the whole account. EMPTY until Producto pastes it, exactly like
-  // STORE_URL used to be: with no pt, Apple ignores ct, so we ship the plain
-  // store URL and lean on the probabilistic backend match for iOS instead.
-  var APPLE_PROVIDER_TOKEN = ''; // ← P14: pega aquí el pt de App Store Connect
+  // iOS App Store provider token (docs P14 / W7): one value for the whole account,
+  // from App Store Connect → App Analytics → Campaigns → "Generate Campaign Link".
+  // With it set, the iOS redirect carries pt+ct so App Store Connect counts the
+  // campaign; ct stays = utm_campaign (M7) so Apple's count crosses with ours.
+  var APPLE_PROVIDER_TOKEN = '129182636';
 
   var STORE_KEY = 'viaxi_attribution';
   var UTM = ['utm_source', 'utm_medium', 'utm_id', 'utm_campaign', 'utm_content', 'utm_term'];
