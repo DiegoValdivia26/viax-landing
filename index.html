@@ -20,6 +20,22 @@
   gtag('js', new Date());
   gtag('config', 'G-FGM14DC4P6');
 </script>
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1074036335345320');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1074036335345320&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
 <!-- Microsoft Clarity -->
 <script>
   (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -263,10 +279,10 @@
       <h1>El aventón de alguien<br>que <span class="em">ya conoces</span>.</h1>
       <p class="lead">Comparte tu camino al trabajo con gente de tu red. Sin desconocidos, sin tarifas: solo una aportación voluntaria a la gasolina, entre conocidos.</p>
       <div class="hero-ctas store-badges">
-        <a href="/ios" data-cta="hero_ios" onclick="gtag('event','download_click',{platform:'ios'})" aria-label="Descargar en el App Store">
+        <a href="/ios" data-cta="hero_ios" onclick="gtag('event','download_click',{platform:'ios'});if(window.fbq)fbq('track','Lead',{content_name:'ios'})" aria-label="Descargar en el App Store">
           <img src="/descargar/appstore.png" alt="Descargar en el App Store" width="189" height="56">
         </a>
-        <a href="/android" data-cta="hero_android" onclick="gtag('event','download_click',{platform:'android'})" aria-label="Disponible en Google Play">
+        <a href="/android" data-cta="hero_android" onclick="gtag('event','download_click',{platform:'android'});if(window.fbq)fbq('track','Lead',{content_name:'android'})" aria-label="Disponible en Google Play">
           <img src="/descargar/googleplay.png" alt="Disponible en Google Play" width="188" height="56">
         </a>
       </div>
