@@ -116,6 +116,15 @@
         transport_type: 'beacon' // flush before location.replace
       });
     }
+    // Meta Pixel: a store tap is the download intent → a 'Lead' for ad
+    // optimization. Guarded because the fast /ios · /android interstitials don't
+    // load the pixel; the Lead already fired on /descargar when the tap happened.
+    if (window.fbq) {
+      fbq('track', 'Lead', {
+        content_name: platform,
+        content_category: params.utm_campaign || '(none)'
+      });
+    }
     var form = new URLSearchParams();
     form.append('clickId', clickId);
     Object.keys(DTO).forEach(function (k) { if (params[k]) form.append(DTO[k], params[k]); });
